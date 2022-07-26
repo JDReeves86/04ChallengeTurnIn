@@ -9,8 +9,7 @@ let optionC = document.getElementById("option-C");
 let optionD = document.getElementById("option-D");
 let hiddenMessage = document.getElementById("hidden-message");
 let scoreBoard = document.getElementById("score-board");
-let score = 0; //remove once turning local storage back on.
-// let score = localStorage.getItem("score");
+
 let quiz = [
     {question: "What color is the sky?",
     choices: ["blue", "green", "grey", "orange"],
@@ -32,13 +31,13 @@ let quiz = [
     choices: ["option A", "option B", "option C", "option D"],
     answers: [false, false, true, false]
     }
-]
-// let questionBank = ["What color is the sky?", "What do fish do?", "Are you hungry?", "What is the meaning of life?", "You have a 25% chance of getting this question right choosing at random."];
-// let answerBankA = ["blue", "fly", "Maybe", "Existence", "option A"];
-// let answerBankB = ["green", "swim", "yes", "To leave the world a better place", "option B"];
-// let answerBankC = ["grey", "run", "no", "I don't know", "option C"];
-// let answerBankD = ["orange", "nothing", "I am the correct answer", "I am still the correct answer", "Am I still the right answer?"];
+];
+
 let timeLeft = 10;
+let score = 0; //remove once turning local storage back on.
+// let score = localStorage.getItem("score");
+
+
 
 scoreBoard.textContent = score;
 
