@@ -11,12 +11,35 @@ let hiddenMessage = document.getElementById("hidden-message");
 let scoreBoard = document.getElementById("score-board");
 let score = 0; //remove once turning local storage back on.
 // let score = localStorage.getItem("score");
-let questionBank = ["What color is the sky?", "What do fish do?", "Are you hungry?", "What is the meaning of life?", "You have a 25% chance of getting this question right choosing at random."];
-let answerBankA = ["blue", "fly", "Maybe", "Existence", "option A"];
-let answerBankB = ["green", "swim", "yes", "To leave the world a better place", "option B"];
-let answerBankC = ["grey", "run", "no", "I don't know", "option C"];
-let answerBankD = ["orange", "nothing", "I am the correct answer", "I am still the correct answer", "Am I still the right answer?"];
+let quiz = [
+    {question: "What color is the sky?",
+    choices: ["blue", "green", "grey", "orange"],
+    answers: [true, false, false, false]
+    },
+    {question: "What do fish do?",
+    choices: ["fly", "swim", "run", "nothing"],
+    answers: [false, true, false, false]
+    },
+    {question: "Are you hungry?",
+    choices: ["maybe", "yes", "no", "I am the correct answer"],
+    answers: [false, false, false, true]
+    },
+    {question: "What is the meaning of life?",
+    choices: ["Existence", "To leave the world a better place", "There is no purpose", "I am still the correct answer"],
+    answers: [false, false, false, true]
+    },
+    {question: "You have a 25% chance of getting this question correct by choosing at random.",
+    choices: ["option A", "option B", "option C", "option D"],
+    answers: [false, false, true, false]
+    }
+]
+// let questionBank = ["What color is the sky?", "What do fish do?", "Are you hungry?", "What is the meaning of life?", "You have a 25% chance of getting this question right choosing at random."];
+// let answerBankA = ["blue", "fly", "Maybe", "Existence", "option A"];
+// let answerBankB = ["green", "swim", "yes", "To leave the world a better place", "option B"];
+// let answerBankC = ["grey", "run", "no", "I don't know", "option C"];
+// let answerBankD = ["orange", "nothing", "I am the correct answer", "I am still the correct answer", "Am I still the right answer?"];
 let timeLeft = 10;
+
 scoreBoard.textContent = score;
 
 // provides functionality for start button to begin the quiz. 
@@ -39,73 +62,100 @@ function startQuiz(event) {
 };
 
 // increases score when called. Need to link to correct answers from answer bank. 
-function increaseScore(event) {
-    event.preventDefault()
+function increaseScore() {
     score++;
     scoreBoard.textContent = `Score: ${score}`;
     // localStorage.setItem("score", score);
 }
 
+//decreases the timer value by 5 upon each call.
+function decreaseTimer() {
+    timeLeft-=5;
+}
+
+function answerChecker(x, y) {
+    if (quiz[x].answers[y] == true) {
+        increaseScore()
+    }
+    else {
+        decreaseTimer()
+    }
+}
+
 function questionOne() {
-    questionBox.textContent = questionBank[0];
-    optionA.textContent = answerBankA[0];
+    questionBox.textContent = quiz[0].question
+    optionA.textContent = quiz[0].choices[0];
     optionA.addEventListener("click", questionTwo);
-    optionA.addEventListener("click", increaseScore);
-    optionB.textContent = answerBankB[0];
-    optionB.addEventListener("click", questionTwo)
-    optionC.textContent = answerBankC[0];
-    optionC.addEventListener("click", questionTwo)
-    optionD.textContent = answerBankD[0];
-    optionD.addEventListener("click", questionTwo)
-    return
+    optionA.addEventListener("click", function() {answerChecker(0, 0);});
+    optionB.textContent = quiz[0].choices[1];
+    // optionB.addEventListener("click", questionTwo);
+    optionB.addEventListener("click", function() {answerChecker(0, 1);});
+    optionC.textContent = quiz[0].choices[2];
+    // optionC.addEventListener("click", questionTwo);
+    optionC.addEventListener("click", function() {answerChecker(0, 2);});
+    optionD.textContent = quiz[0].choices[3];
+    // optionD.addEventListener("click", questionTwo);
+    optionD.addEventListener("click", function() {answerChecker(0, 3);});   
 };
 function questionTwo() {
-    questionBox.textContent = questionBank[1];
-    optionA.textContent = answerBankA[1];
-    optionA.addEventListener("click", questionThree)
-    optionB.textContent = answerBankB[1];
-    optionB.addEventListener("click", questionThree)
-    optionB.addEventListener("click", increaseScore);
-    optionC.textContent = answerBankC[1];
-    optionC.addEventListener("click", questionThree)
-    optionD.textContent = answerBankD[1];
-    optionD.addEventListener("click", questionThree)
+    questionBox.textContent = quiz[1].question;
+    optionA.textContent = quiz[1].choices[0];
+    optionA.addEventListener("click", questionThree);
+    optionA.addEventListener("click", function() {answerChecker(1, 0);});
+    optionB.textContent = quiz[1].choices[1];
+    // optionB.addEventListener("click", questionThree);
+    optionB.addEventListener("click", function() {answerChecker(1, 1);});
+    optionC.textContent = quiz[1].choices[2];
+    // optionC.addEventListener("click", questionThree);
+    optionC.addEventListener("click", function() {answerChecker(1, 2);});
+    optionD.textContent = quiz[1].choices[3];
+    // optionD.addEventListener("click", questionThree);
+    optionD.addEventListener("click", function() {answerChecker(1, 3);});
 };
 function questionThree() {
-    questionBox.textContent = questionBank[2];
-    optionA.textContent = answerBankA[2];
-    optionA.addEventListener("click", questionFour)
-    optionB.textContent = answerBankB[2];
-    optionB.addEventListener("click", questionFour)
-    optionC.textContent = answerBankC[2];
-    optionC.addEventListener("click", questionFour)
-    optionD.textContent = answerBankD[2];
-    optionD.addEventListener("click", questionFour)
-    optionD.addEventListener("click", increaseScore);
+    questionBox.textContent = quiz[2].question
+    optionA.textContent = quiz[2].choices[0];
+    optionA.addEventListener("click", questionFour);
+    optionA.addEventListener("click", function() {answerChecker(2, 0);});
+    optionB.textContent = quiz[2].choices[1];
+    // optionB.addEventListener("click", questionFour);
+    optionB.addEventListener("click", function() {answerChecker(2, 1);});
+    optionC.textContent = quiz[2].choices[2];
+    // optionC.addEventListener("click", questionFour);
+    optionC.addEventListener("click", function() {answerChecker(2, 2);});
+    optionD.textContent = quiz[2].choices[3];
+    // optionD.addEventListener("click", questionFour);
+    optionD.addEventListener("click", function() {answerChecker(2, 3);});   
 };
 function questionFour() {
-    questionBox.textContent = questionBank[3];
-    optionA.textContent = answerBankA[3];
-    optionA.addEventListener("click", questionFive)
-    optionB.textContent = answerBankB[3];
-    optionB.addEventListener("click", questionFive)
-    optionC.textContent = answerBankC[3];
-    optionC.addEventListener("click", questionFive)
-    optionD.textContent = answerBankD[3];
-    optionD.addEventListener("click", questionFive)
-    optionD.addEventListener("click", increaseScore);
+    questionBox.textContent = quiz[3].question
+    optionA.textContent = quiz[3].choices[0];
+    optionA.addEventListener("click", questionFive);
+    optionA.addEventListener("click", function() {answerChecker(3, 0);});
+    optionB.textContent = quiz[3].choices[1];
+    // optionB.addEventListener("click", questionFive);
+    optionB.addEventListener("click", function() {answerChecker(3, 1);});
+    optionC.textContent = quiz[3].choices[2];
+    // optionC.addEventListener("click", questionFive);
+    optionC.addEventListener("click", function() {answerChecker(3, 2);});
+    optionD.textContent = quiz[3].choices[3];
+    // optionD.addEventListener("click", questionFive);
+    optionD.addEventListener("click", function() {answerChecker(3, 3);});   
 };
 function questionFive() {
-    questionBox.textContent = questionBank[4];
-    optionA.textContent = answerBankA[4];
-    optionA.addEventListener("click", questionTwo)
-    optionB.textContent = answerBankB[4];
-    optionB.addEventListener("click", questionTwo)
-    optionB.addEventListener("click", increaseScore);
-    optionC.textContent = answerBankC[4];
-    optionC.addEventListener("click", questionTwo)
-    optionD.textContent = answerBankD[4];
-    optionD.addEventListener("click", questionTwo)
+    questionBox.textContent = quiz[4].question
+    optionA.textContent = quiz[4].choices[0];
+    // optionA.addEventListener("click", questionTwo);
+    optionA.addEventListener("click", function() {answerChecker(4, 0);});
+    optionB.textContent = quiz[4].choices[1];
+    // optionB.addEventListener("click", questionTwo);
+    optionB.addEventListener("click", function() {answerChecker(4, 1);});
+    optionC.textContent = quiz[4].choices[2];
+    // optionC.addEventListener("click", questionTwo);
+    optionC.addEventListener("click", function() {answerChecker(4, 2);});
+    optionD.textContent = quiz[4].choices[3];
+    // optionD.addEventListener("click", questionTwo);
+    optionD.addEventListener("click", function() {answerChecker(4, 3);});   
 };
 
 startButton.addEventListener("click", startQuiz);
