@@ -42,9 +42,8 @@ scoreBoard.textContent = `Score: ${score}` // scoreboard doesn't display properl
 
 // provides functionality for start button to begin the quiz. 
 function startQuiz() {
-    startButton.style = "visibility: hidden"; // hides start button when quiz started
+    startButton.setAttribute("disabled", "true") // disables start button when quiz started
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
-    hiddenMessage.style = "visibility: hidden";
     timeLeft = 40;
     scoreBoard.textContent = `Score: ${score}` // Scoreboard does not reset properly unless reset at the click of starting the quiz.
     let quizTime = setInterval(function() {
@@ -55,14 +54,16 @@ function startQuiz() {
             outOfTime();
         };
     }, 1000);
+    optionA.removeEventListener("click", finalPage)
+    optionB.removeEventListener("click", finalPage)
+    optionC.removeEventListener("click", finalPage)
+    optionD.removeEventListener("click", finalPage)
 };
 
 // Changes HTML to display that the user ran out of time.
 function outOfTime(){
-    hiddenMessage.textContent = "Time's up!";
-    hiddenMessage.style = "visibility: visible";
     quizBody.style = "visibility: hidden";
-    startButton.style = "visibility: visible";
+    startButton.removeAttribute("disabled")
     timer.textContent = `You are out of time`;
     score = 0;
 };
@@ -72,11 +73,22 @@ function answerChecker(x, y) {
     if (quiz[x].answers[y] == true) {
         score++;
         scoreBoard.textContent = `Score: ${score}` // If taken out of this function, the scoreboard doesn't tally properly.
+        showHiddenMessage(true) 
     }
     else {
         timeLeft-=5;
+        showHiddenMessage(false)
     }
 };
+
+function showHiddenMessage(x) {
+    if (x == true) {
+        hiddenMessage.textContent = "Correct"
+    }
+    else {
+        hiddenMessage.textContent = "Incorrect"
+    }
+}
 
 function questionOne() {
     questionBox.textContent = quiz[0].question;
@@ -208,6 +220,10 @@ function finalPage() {
         generateLeaderBoard(input.value);
         restart.style = "visibility: visible"
         clearInterval(quizTime);
+        optionA.removeEventListener("click", finalPage)
+        optionB.removeEventListener("click", finalPage)
+        optionC.removeEventListener("click", finalPage)
+        optionD.removeEventListener("click", finalPage)
     });
 }
 

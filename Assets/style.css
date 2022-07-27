@@ -63,7 +63,7 @@ div p {
 }
 
 #hidden-message {
-    visibility: hidden;
+    visibility: visible;
     color: var(--light);
     background-color: var(--white);
     border: none;
