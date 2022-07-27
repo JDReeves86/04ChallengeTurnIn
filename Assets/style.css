@@ -69,3 +69,8 @@ div p {
     border: none;
 }
 
+#leaderboard {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}

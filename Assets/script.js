@@ -192,6 +192,7 @@ function questionFive() {
 function finalPage() {
     quizBody.remove()
     let form = document.createElement("form");
+    form.setAttribute("id", "leaderboard")
     form.textContent = "Input your name";
     document.body.appendChild(form);
     let input = document.createElement("input");
