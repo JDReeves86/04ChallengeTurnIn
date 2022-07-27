@@ -204,11 +204,11 @@ function finalPage() {
     form.appendChild(button);
     document.getElementById("submit-score").addEventListener("click", function(event){
         event.preventDefault()
-        generateLeaderBoard()
+        generateLeaderBoard(input.value)
     });
 }
 
-function generateLeaderBoard() {
+function generateLeaderBoard(x) {
     let leaderBoard = document.createElement("div");
     leaderBoard.setAttribute("id", "leaderboard");
     document.body.appendChild(leaderBoard);
@@ -218,7 +218,7 @@ function generateLeaderBoard() {
     let list = document.createElement("ol");
     leaderBoard.appendChild(list);
     let userName = document.createElement("li");
-    userName.textContent = "placeholder";
+    userName.textContent = x;
     list.appendChild(userName);
 }
 
