@@ -9,6 +9,7 @@ let optionC = document.getElementById("option-C");
 let optionD = document.getElementById("option-D");
 let hiddenMessage = document.getElementById("hidden-message");
 let scoreBoard = document.getElementById("score-board");
+let restart = document.getElementById("restart");
 
 
 let quiz = [
@@ -192,7 +193,7 @@ function questionFive() {
 function finalPage() {
     quizBody.remove()
     let form = document.createElement("form");
-    form.setAttribute("id", "leaderboard")
+    form.setAttribute("id", "username")
     form.textContent = "Input your name";
     document.body.appendChild(form);
     let input = document.createElement("input");
@@ -203,12 +204,15 @@ function finalPage() {
     button.setAttribute("id", "submit-score");
     form.appendChild(button);
     document.getElementById("submit-score").addEventListener("click", function(event){
-        event.preventDefault()
-        generateLeaderBoard(input.value)
+        event.preventDefault();
+        generateLeaderBoard(input.value);
+        restart.style = "visibility: visible"
+        clearInterval(quizTime);
     });
 }
 
 function generateLeaderBoard(x) {
+    document.getElementById("username").remove();
     let leaderBoard = document.createElement("div");
     leaderBoard.setAttribute("id", "leaderboard");
     document.body.appendChild(leaderBoard);
@@ -218,14 +222,16 @@ function generateLeaderBoard(x) {
     let list = document.createElement("ol");
     leaderBoard.appendChild(list);
     let userName = document.createElement("li");
-    userName.textContent = x;
+    userName.textContent = `${x} Score: ${score}`;
     list.appendChild(userName);
 }
 
 
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", questionOne);
-// startButton.addEventListener("click", ***);
+restart.addEventListener("click", function(){
+    window.location.reload()
+});
 
 optionA.addEventListener("click", function(event) {
     let dataQuiz = event.target.getAttribute("data-quiz");

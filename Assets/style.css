@@ -69,6 +69,7 @@ div p {
     border: none;
 }
 
+#username,
 #leaderboard {
     display: flex;
     flex-flow: column;
