@@ -44,7 +44,7 @@ function startQuiz() {
     startButton.style = "visibility: hidden"; // hides start button when quiz started
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
     hiddenMessage.style = "visibility: hidden";
-    timeLeft = 10;
+    timeLeft = 40;
     scoreBoard.textContent = `Score: ${score}` // Scoreboard does not reset properly unless reset at the click of starting the quiz.
     let quizTime = setInterval(function() {
         timeLeft--;
@@ -171,29 +171,32 @@ function questionFive() {
     optionA.dataset.answer = 0;
     optionA.textContent = quiz[4].choices[0];
     optionA.removeEventListener("click", questionFive);
-    optionA.addEventListener("click", questionFive);
+    optionA.addEventListener("click", finalPage);
     optionB.dataset.quiz = 4;
     optionB.dataset.answer = 1;
     optionB.textContent = quiz[4].choices[1];
     optionB.removeEventListener("click", questionFive);
-    optionB.addEventListener("click", questionFive);
+    optionB.addEventListener("click", finalPage);
     optionC.dataset.quiz = 4;
     optionC.dataset.answer = 2;
     optionC.textContent = quiz[4].choices[2];
     optionC.removeEventListener("click", questionFive);
-    optionC.addEventListener("click", questionFive);
+    optionC.addEventListener("click", finalPage);
     optionD.dataset.quiz = 4;
     optionD.dataset.answer = 3;
     optionD.textContent = quiz[4].choices[3];
     optionD.removeEventListener("click", questionFive);
-    optionD.addEventListener("click", questionFive);
+    optionD.addEventListener("click", finalPage);
 };
 
 function finalPage() {
     quizBody.remove()
     let form = document.createElement("form");
     form.textContent = "Input your name";
-    document.body.appendChild(form)
+    document.body.appendChild(form);
+    let input = document.createElement("input");
+    input.setAttribute("type", "text");
+    form.appendChild(input)
 }
 
 
