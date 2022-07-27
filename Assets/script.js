@@ -201,7 +201,7 @@ function finalPage() {
     let button = document.createElement("button");
     button.setAttribute("id", "submit-score");
     form.appendChild(button);
-    document.getElementById("submit-score").addEventListener("click", generateLeaderBoard();
+    document.getElementById("submit-score").addEventListener("click", generateLeaderBoard());
 }
 
 function generateLeaderBoard() {
