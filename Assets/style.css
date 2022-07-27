@@ -62,11 +62,10 @@ div p {
     align-items: flex-start;
 }
 
-section p {
-    color: var(--light);
-}
-
 #hidden-message {
     visibility: hidden;
+    color: var(--light);
+    background-color: var(--white);
+    border: none;
 }
 
