@@ -13,7 +13,7 @@ let restart = document.getElementById("restart");
 
 let score = 0
 let quizTime;
-
+let timeLeft;
 
 let quiz = [
     {question: "What color is the sky?",
@@ -46,13 +46,13 @@ scoreBoard.textContent = `Score: ${score}`
 function startQuiz() {
     startButton.setAttribute("disabled", "true") // disables start button when quiz started
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
-    timeLeft = 90;
+    timeLeft = 10;
     quizTime = setInterval(function() {
         timeLeft--;
         timer.textContent = `Time left: ${timeLeft}`;
         if(timeLeft <= 0){
             clearInterval(quizTime);
-            outOfTime();
+            finalPage();
         };
     }, 1000);
     optionA.removeEventListener("click", finalPage)
@@ -239,7 +239,7 @@ function generateLeaderBoard(x) {
     let list = document.createElement("ol"); //generates leaderboard ol
     leaderBoard.appendChild(list);
     let userName = document.createElement("li"); // generates leaderboard list items
-    userName.textContent = `${x} Score: ${score}`;
+    userName.textContent = `${x}  Score: ${score}  Time left: ${timeLeft} seconds`;
     list.appendChild(userName);
 
     let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
