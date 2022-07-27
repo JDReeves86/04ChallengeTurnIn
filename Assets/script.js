@@ -11,6 +11,8 @@ let hiddenMessage = document.getElementById("hidden-message");
 let scoreBoard = document.getElementById("score-board");
 let restart = document.getElementById("restart");
 
+let score = 0
+
 let quiz = [
     {question: "What color is the sky?",
     choices: ["blue", "green", "grey", "orange"],
@@ -34,13 +36,23 @@ let quiz = [
     }
 ];
 
-let score = 0; //remove if turning local storage back on.
+// let score = 0; //remove if turning local storage back on.
 scoreBoard.textContent = `Score: ${score}` 
-// let score = localStorage.getItem("score");
+
 // if (score == null) {
 //     localStorage.setItem("score", 0)
 // };
 
+// calls for local storage, if value is null, will set to zero.
+function init() {
+    let storedScore = localStorage.getItem("score");
+    if (storedScore == null) {
+        score = 0
+    }
+    else {
+        score = storedScore
+    }
+}
 
 // provides functionality for start button to begin the quiz. 
 function startQuiz() {
@@ -74,7 +86,7 @@ function answerChecker(x, y) {
     if (quiz[x].answers[y] == true) {
         score++;
         scoreBoard.textContent = `Score: ${score}`
-        // localStorage.setItem("score", score) Comment on if wanting local storage.
+        localStorage.setItem("score", score) 
         hiddenMessage.textContent = "Correct"
     }
     else {
@@ -220,7 +232,6 @@ function finalPage() {
     document.getElementById("submit-score").addEventListener("click", function(event){
         event.preventDefault();
         generateLeaderBoard(input.value);
-        restart.style = "visibility: visible"
         clearInterval(quizTime); // <<==================================================================How do I get the timer to quit once the quiz is completed??
         optionA.removeEventListener("click", finalPage)
         optionB.removeEventListener("click", finalPage)
@@ -230,26 +241,39 @@ function finalPage() {
 }
 
 function generateLeaderBoard(x) {
-    document.getElementById("username").remove();
-    let leaderBoard = document.createElement("div");
+    document.getElementById("username").remove(); // Remove form input elements
+    let leaderBoard = document.createElement("div"); // generates div for leaderboard elements
     leaderBoard.setAttribute("id", "leaderboard");
     document.body.appendChild(leaderBoard);
-    let header = document.createElement("h3");
+    let header = document.createElement("h3"); // generates leaderboard header h3
     header.textContent = "Leaderboard";
     leaderBoard.appendChild(header);
-    let list = document.createElement("ol");
+    let list = document.createElement("ol"); //generates leaderboard ol
     leaderBoard.appendChild(list);
-    let userName = document.createElement("li");
+    let userName = document.createElement("li"); // generates leaderboard list items
     userName.textContent = `${x} Score: ${score}`;
     list.appendChild(userName);
+    let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
+    restart.setAttribute("id", "restart");
+    restart.textContent = "Restart"
+    leaderBoard.appendChild(restart);
+    restart.addEventListener("click", function(){ // sets functionality of reset button.
+        window.location.reload()
+    });
+    let clearLeaders = document.createElement("button"); // generates button to clear the leaderboard, resets local storage score to 0
+    clearLeaders.setAttribute("id", "restart");
+    clearLeaders.textContent = "Clear Leaderboard"
+    leaderBoard.appendChild(clearLeaders);
+    clearLeaders.addEventListener("click", function(){
+        localStorage.setItem("score", 0)
+    });
 }
 
+//calls init()
+init()
 
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", questionOne);
-restart.addEventListener("click", function(){
-    window.location.reload()
-});
 
 optionA.addEventListener("click", function(event) {
     let dataQuiz = event.target.getAttribute("data-quiz");
