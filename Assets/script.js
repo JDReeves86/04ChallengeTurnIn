@@ -50,28 +50,33 @@ function startQuiz(event) {
         timer.textContent = `Time left: ${timeLeft}`;
         timeLeft--
         if(timeLeft === 0){
-            hiddenMessage.textContent = "Time's up!";
-            hiddenMessage.style = "visibility: visible";
-            quizBody.style = "visibility: hidden";
-            startButton.style = "visibility: visible";
-            timer.textContent = `You are out of time`;
+            outOfTime()
             clearInterval(quizTime)
         }
     }, 1000);
 };
 
-// increases score when called. Need to link to correct answers from answer bank. 
+// Changes HTML to display that the user ran out of time.
+function outOfTime(){
+    hiddenMessage.textContent = "Time's up!";
+    hiddenMessage.style = "visibility: visible";
+    quizBody.style = "visibility: hidden";
+    startButton.style = "visibility: visible";
+    timer.textContent = `You are out of time`;
+};
+
+// increases score when called.
 function increaseScore() {
     score++;
     scoreBoard.textContent = `Score: ${score}`;
     // localStorage.setItem("score", score);
-}
+};
 
 //decreases the timer value by 5 upon each call.
 function decreaseTimer() {
     timeLeft-=5;
-}
-
+};
+// checks boolean values in object associated with correct answers. True = correct answer. If true, adds a point to the score, if false, timer decreases by 5 seconds.
 function answerChecker(x, y) {
     if (quiz[x].answers[y] == true) {
         increaseScore()
@@ -79,7 +84,7 @@ function answerChecker(x, y) {
     else {
         decreaseTimer()
     }
-}
+};
 
 function questionOne() {
     questionBox.textContent = quiz[0].question
