@@ -199,9 +199,13 @@ function finalPage() {
     input.setAttribute("type", "text");
     form.appendChild(input)
     let button = document.createElement("button");
+    button.textContent = "submit"
     button.setAttribute("id", "submit-score");
     form.appendChild(button);
-    document.getElementById("submit-score").addEventListener("click", generateLeaderBoard());
+    document.getElementById("submit-score").addEventListener("click", function(event){
+        event.preventDefault()
+        generateLeaderBoard()
+    });
 }
 
 function generateLeaderBoard() {
