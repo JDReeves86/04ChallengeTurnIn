@@ -46,7 +46,7 @@ scoreBoard.textContent = `Score: ${score}`
 function startQuiz() {
     startButton.setAttribute("disabled", "true") // disables start button when quiz started
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
-    timeLeft = 400;
+    timeLeft = 90;
     quizTime = setInterval(function() {
         timeLeft--;
         timer.textContent = `Time left: ${timeLeft}`;
@@ -77,7 +77,7 @@ function answerChecker(x, y) {
         hiddenMessage.textContent = "Correct"
     }
     else {
-        timeLeft-=5;
+        timeLeft-=15;
         hiddenMessage.textContent = "Incorrect"
     }
 };
@@ -206,6 +206,7 @@ function questionFive() {
 function finalPage() {
     quizBody.remove();
     clearInterval(quizTime);
+    timer.textContent = `Quiz finished`;
     let form = document.createElement("form");
     form.setAttribute("id", "username")
     form.textContent = "Input your name";
