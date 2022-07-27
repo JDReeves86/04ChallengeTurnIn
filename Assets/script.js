@@ -11,7 +11,6 @@ let hiddenMessage = document.getElementById("hidden-message");
 let scoreBoard = document.getElementById("score-board");
 let restart = document.getElementById("restart");
 
-
 let quiz = [
     {question: "What color is the sky?",
     choices: ["blue", "green", "grey", "orange"],
@@ -35,17 +34,19 @@ let quiz = [
     }
 ];
 
-let score = ""; //remove once turning local storage back on.
+let score = 0; //remove if turning local storage back on.
+scoreBoard.textContent = `Score: ${score}` 
 // let score = localStorage.getItem("score");
+// if (score == null) {
+//     localStorage.setItem("score", 0)
+// };
 
-scoreBoard.textContent = `Score: ${score}` // scoreboard doesn't display properly when placed globally. Functions normally when called locally inside functions.
 
 // provides functionality for start button to begin the quiz. 
 function startQuiz() {
     startButton.setAttribute("disabled", "true") // disables start button when quiz started
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
-    timeLeft = 40;
-    scoreBoard.textContent = `Score: ${score}` // Scoreboard does not reset properly unless reset at the click of starting the quiz.
+    timeLeft = 400;
     let quizTime = setInterval(function() {
         timeLeft--;
         timer.textContent = `Time left: ${timeLeft}`;
@@ -72,24 +73,17 @@ function outOfTime(){
 function answerChecker(x, y) {
     if (quiz[x].answers[y] == true) {
         score++;
-        scoreBoard.textContent = `Score: ${score}` // If taken out of this function, the scoreboard doesn't tally properly.
-        showHiddenMessage(true) 
-    }
-    else {
-        timeLeft-=5;
-        showHiddenMessage(false)
-    }
-};
-
-function showHiddenMessage(x) {
-    if (x == true) {
+        scoreBoard.textContent = `Score: ${score}`
+        // localStorage.setItem("score", score) Comment on if wanting local storage.
         hiddenMessage.textContent = "Correct"
     }
     else {
+        timeLeft-=5;
         hiddenMessage.textContent = "Incorrect"
     }
-}
+};
 
+//populates first question
 function questionOne() {
     questionBox.textContent = quiz[0].question;
     optionA.dataset.quiz = 0;
@@ -109,6 +103,8 @@ function questionOne() {
     optionD.textContent = quiz[0].choices[3];
     optionD.addEventListener("click", questionTwo);
 };
+
+//populates second question
 function questionTwo() {
     questionBox.textContent = quiz[1].question;
     optionA.dataset.quiz = 1;
@@ -132,6 +128,8 @@ function questionTwo() {
     optionD.removeEventListener("click", questionTwo);
     optionD.addEventListener("click", questionThree);
 };
+
+//populates third question
 function questionThree() {
     questionBox.textContent = quiz[2].question
     optionA.dataset.quiz = 2;
@@ -155,6 +153,8 @@ function questionThree() {
     optionD.removeEventListener("click", questionThree);
     optionD.addEventListener("click", questionFour);
 };
+
+// populates fourth question
 function questionFour() {
     questionBox.textContent = quiz[3].question
     optionA.dataset.quiz = 3;
@@ -178,6 +178,8 @@ function questionFour() {
     optionD.removeEventListener("click", questionFour);
     optionD.addEventListener("click", questionFive);
 };
+
+// populates fifth question
 function questionFive() {
     questionBox.textContent = quiz[4].question
     optionA.dataset.quiz = 4;
@@ -219,7 +221,7 @@ function finalPage() {
         event.preventDefault();
         generateLeaderBoard(input.value);
         restart.style = "visibility: visible"
-        clearInterval(quizTime);
+        clearInterval(quizTime); // <<==================================================================How do I get the timer to quit once the quiz is completed??
         optionA.removeEventListener("click", finalPage)
         optionB.removeEventListener("click", finalPage)
         optionC.removeEventListener("click", finalPage)
@@ -269,3 +271,5 @@ optionD.addEventListener("click", function(event) {
     let dataAnswer = event.target.getAttribute("data-answer");
     answerChecker(dataQuiz, dataAnswer);
 }); 
+
+

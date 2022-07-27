@@ -15,7 +15,7 @@ html {
 
 .column {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
 }
 
 body {
@@ -43,6 +43,7 @@ button {
 
 section {
     width: 50%;
+    height: 50%;
     justify-content: center;
     align-content: left;
     visibility: hidden;
@@ -67,6 +68,8 @@ div p {
     color: var(--light);
     background-color: var(--white);
     border: none;
+    margin: 0;
+    padding: 0;
 }
 
 #username,
