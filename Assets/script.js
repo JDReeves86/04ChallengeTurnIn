@@ -198,6 +198,24 @@ function finalPage() {
     let input = document.createElement("input");
     input.setAttribute("type", "text");
     form.appendChild(input)
+    let button = document.createElement("button");
+    button.setAttribute("id", "submit-score");
+    form.appendChild(button);
+    document.getElementById("submit-score").addEventListener("click", generateLeaderBoard();
+}
+
+function generateLeaderBoard() {
+    let leaderBoard = document.createElement("div");
+    leaderBoard.setAttribute("id", "leaderboard");
+    document.body.appendChild(leaderBoard);
+    let header = document.createElement("h3");
+    header.textContent = "Leaderboard";
+    leaderBoard.appendChild(header);
+    let list = document.createElement("ol");
+    leaderBoard.appendChild(list);
+    let userName = document.createElement("li");
+    userName.textContent = "placeholder";
+    list.appendChild(userName);
 }
 
 
