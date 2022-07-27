@@ -10,6 +10,8 @@ let optionD = document.getElementById("option-D");
 let hiddenMessage = document.getElementById("hidden-message");
 let scoreBoard = document.getElementById("score-board");
 
+
+
 let quiz = [
     {question: "What color is the sky?",
     choices: ["blue", "green", "grey", "orange"],
@@ -33,26 +35,25 @@ let quiz = [
     }
 ];
 
-let timeLeft = 10;
+let timeLeft = 30;
 let score = 0; //remove once turning local storage back on.
 // let score = localStorage.getItem("score");
 
-
-
-scoreBoard.textContent = score;
+scoreBoard.textContent = `Score: --`;
 
 // provides functionality for start button to begin the quiz. 
-function startQuiz(event) {
-    event.preventDefault()
-    startButton.style = "visibility: hidden" // hides start button when quiz started
-    quizBody.style = "visibility: visible" // shows quiz body when quiz started
+function startQuiz() {
+    startButton.style = "visibility: hidden"; // hides start button when quiz started
+    quizBody.style = "visibility: visible"; // shows quiz body when quiz started
     let quizTime = setInterval(function() {
+        timeLeft--;
         timer.textContent = `Time left: ${timeLeft}`;
-        timeLeft--
-        if(timeLeft === 0){
-            outOfTime()
-            clearInterval(quizTime)
-        }
+        if(timeLeft <= 0){
+            timeLeft = 30;
+            score = 0;
+            clearInterval(quizTime);
+            outOfTime();
+        };
     }, 1000);
 };
 
@@ -65,103 +66,77 @@ function outOfTime(){
     timer.textContent = `You are out of time`;
 };
 
-// increases score when called.
-function increaseScore() {
-    score++;
-    scoreBoard.textContent = `Score: ${score}`;
-    // localStorage.setItem("score", score);
-};
-
-//decreases the timer value by 5 upon each call.
-function decreaseTimer() {
-    timeLeft-=5;
-};
 // checks boolean values in object associated with correct answers. True = correct answer. If true, adds a point to the score, if false, timer decreases by 5 seconds.
 function answerChecker(x, y) {
     if (quiz[x].answers[y] == true) {
-        increaseScore()
+        score++;
+        scoreBoard.textContent = `Score: ${score}`
     }
     else {
-        decreaseTimer()
+        timeLeft-=5;
     }
 };
 
 function questionOne() {
     questionBox.textContent = quiz[0].question
     optionA.textContent = quiz[0].choices[0];
-    optionA.addEventListener("click", questionTwo);
-    optionA.addEventListener("click", function() {answerChecker(0, 0);});
+    // optionA.addEventListener("click", questionTwo);
     optionB.textContent = quiz[0].choices[1];
     // optionB.addEventListener("click", questionTwo);
-    optionB.addEventListener("click", function() {answerChecker(0, 1);});
     optionC.textContent = quiz[0].choices[2];
     // optionC.addEventListener("click", questionTwo);
-    optionC.addEventListener("click", function() {answerChecker(0, 2);});
     optionD.textContent = quiz[0].choices[3];
     // optionD.addEventListener("click", questionTwo);
-    optionD.addEventListener("click", function() {answerChecker(0, 3);});   
 };
 function questionTwo() {
     questionBox.textContent = quiz[1].question;
     optionA.textContent = quiz[1].choices[0];
     optionA.addEventListener("click", questionThree);
-    optionA.addEventListener("click", function() {answerChecker(1, 0);});
     optionB.textContent = quiz[1].choices[1];
-    // optionB.addEventListener("click", questionThree);
-    optionB.addEventListener("click", function() {answerChecker(1, 1);});
+    // optionB.addEventListener("click", questionThree););
     optionC.textContent = quiz[1].choices[2];
     // optionC.addEventListener("click", questionThree);
-    optionC.addEventListener("click", function() {answerChecker(1, 2);});
     optionD.textContent = quiz[1].choices[3];
     // optionD.addEventListener("click", questionThree);
-    optionD.addEventListener("click", function() {answerChecker(1, 3);});
 };
 function questionThree() {
     questionBox.textContent = quiz[2].question
     optionA.textContent = quiz[2].choices[0];
     optionA.addEventListener("click", questionFour);
-    optionA.addEventListener("click", function() {answerChecker(2, 0);});
     optionB.textContent = quiz[2].choices[1];
     // optionB.addEventListener("click", questionFour);
-    optionB.addEventListener("click", function() {answerChecker(2, 1);});
     optionC.textContent = quiz[2].choices[2];
     // optionC.addEventListener("click", questionFour);
-    optionC.addEventListener("click", function() {answerChecker(2, 2);});
     optionD.textContent = quiz[2].choices[3];
     // optionD.addEventListener("click", questionFour);
-    optionD.addEventListener("click", function() {answerChecker(2, 3);});   
 };
 function questionFour() {
     questionBox.textContent = quiz[3].question
     optionA.textContent = quiz[3].choices[0];
     optionA.addEventListener("click", questionFive);
-    optionA.addEventListener("click", function() {answerChecker(3, 0);});
     optionB.textContent = quiz[3].choices[1];
     // optionB.addEventListener("click", questionFive);
-    optionB.addEventListener("click", function() {answerChecker(3, 1);});
     optionC.textContent = quiz[3].choices[2];
     // optionC.addEventListener("click", questionFive);
-    optionC.addEventListener("click", function() {answerChecker(3, 2);});
     optionD.textContent = quiz[3].choices[3];
     // optionD.addEventListener("click", questionFive);
-    optionD.addEventListener("click", function() {answerChecker(3, 3);});   
 };
 function questionFive() {
     questionBox.textContent = quiz[4].question
     optionA.textContent = quiz[4].choices[0];
     // optionA.addEventListener("click", questionTwo);
-    optionA.addEventListener("click", function() {answerChecker(4, 0);});
     optionB.textContent = quiz[4].choices[1];
     // optionB.addEventListener("click", questionTwo);
-    optionB.addEventListener("click", function() {answerChecker(4, 1);});
     optionC.textContent = quiz[4].choices[2];
     // optionC.addEventListener("click", questionTwo);
-    optionC.addEventListener("click", function() {answerChecker(4, 2);});
     optionD.textContent = quiz[4].choices[3];
     // optionD.addEventListener("click", questionTwo);
-    optionD.addEventListener("click", function() {answerChecker(4, 3);});   
 };
 
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", questionOne);
 // startButton.addEventListener("click", ***);
+optionA.addEventListener("click", function() {answerChecker(0, 0);});
+optionB.addEventListener("click", function() {answerChecker(0, 1);});
+optionC.addEventListener("click", function() {answerChecker(0, 2);});
+optionD.addEventListener("click", function() {answerChecker(0, 3);}); 
