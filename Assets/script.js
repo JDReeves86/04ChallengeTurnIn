@@ -12,6 +12,8 @@ let scoreBoard = document.getElementById("score-board");
 let restart = document.getElementById("restart");
 
 let score = 0
+let quizTime;
+
 
 let quiz = [
     {question: "What color is the sky?",
@@ -39,27 +41,13 @@ let quiz = [
 // let score = 0; //remove if turning local storage back on.
 scoreBoard.textContent = `Score: ${score}` 
 
-// if (score == null) {
-//     localStorage.setItem("score", 0)
-// };
-
-// calls for local storage, if value is null, will set to zero.
-function init() {
-    let storedScore = localStorage.getItem("score");
-    if (storedScore == null) {
-        score = 0
-    }
-    else {
-        score = storedScore
-    }
-}
 
 // provides functionality for start button to begin the quiz. 
 function startQuiz() {
     startButton.setAttribute("disabled", "true") // disables start button when quiz started
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
     timeLeft = 400;
-    let quizTime = setInterval(function() {
+    quizTime = setInterval(function() {
         timeLeft--;
         timer.textContent = `Time left: ${timeLeft}`;
         if(timeLeft <= 0){
@@ -85,8 +73,7 @@ function outOfTime(){
 function answerChecker(x, y) {
     if (quiz[x].answers[y] == true) {
         score++;
-        scoreBoard.textContent = `Score: ${score}`
-        localStorage.setItem("score", score) 
+        scoreBoard.textContent = `Score: ${score}` 
         hiddenMessage.textContent = "Correct"
     }
     else {
@@ -217,7 +204,8 @@ function questionFive() {
 };
 
 function finalPage() {
-    quizBody.remove()
+    quizBody.remove();
+    clearInterval(quizTime);
     let form = document.createElement("form");
     form.setAttribute("id", "username")
     form.textContent = "Input your name";
@@ -232,7 +220,6 @@ function finalPage() {
     document.getElementById("submit-score").addEventListener("click", function(event){
         event.preventDefault();
         generateLeaderBoard(input.value);
-        clearInterval(quizTime); // <<==================================================================How do I get the timer to quit once the quiz is completed??
         optionA.removeEventListener("click", finalPage)
         optionB.removeEventListener("click", finalPage)
         optionC.removeEventListener("click", finalPage)
@@ -253,6 +240,7 @@ function generateLeaderBoard(x) {
     let userName = document.createElement("li"); // generates leaderboard list items
     userName.textContent = `${x} Score: ${score}`;
     list.appendChild(userName);
+
     let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
     restart.setAttribute("id", "restart");
     restart.textContent = "Restart"
@@ -260,17 +248,17 @@ function generateLeaderBoard(x) {
     restart.addEventListener("click", function(){ // sets functionality of reset button.
         window.location.reload()
     });
+
     let clearLeaders = document.createElement("button"); // generates button to clear the leaderboard, resets local storage score to 0
     clearLeaders.setAttribute("id", "restart");
     clearLeaders.textContent = "Clear Leaderboard"
     leaderBoard.appendChild(clearLeaders);
     clearLeaders.addEventListener("click", function(){
-        localStorage.setItem("score", 0)
     });
 }
 
 //calls init()
-init()
+// init()
 
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", questionOne);
