@@ -219,13 +219,27 @@ function finalPage() {
 
     document.getElementById("submit-score").addEventListener("click", function(event){
         event.preventDefault();
+
+        userScores.user = input.value
+        userScores.totalScore = score
+        userScores.totalTime = 
+
         generateLeaderBoard(input.value);
+        
         optionA.removeEventListener("click", finalPage);
         optionB.removeEventListener("click", finalPage);
         optionC.removeEventListener("click", finalPage);
         optionD.removeEventListener("click", finalPage);
     });
 }
+
+
+let userScores = {
+    user: "",
+    totalScore: "",
+    totalTime: ""
+}
+
 
 // Generates the leaderboard, requires input from the user as the 'x' variable to ensure users typed input is displayed.
 function generateLeaderBoard(x) {
