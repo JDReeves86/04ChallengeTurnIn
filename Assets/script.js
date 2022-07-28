@@ -10,10 +10,21 @@ let optionD = document.getElementById("option-D");
 let hiddenMessage = document.getElementById("hidden-message");
 let scoreBoard = document.getElementById("score-board");
 let restart = document.getElementById("restart");
-let score = 0
-let quizTime;
-let timeLeft;
+let score = 0;
 
+// Allows for global scoping of timer
+let quizTime; 
+
+// Allows for global scoping of remaining time
+let timeLeft; 
+
+// for setting local storage of userScores object
+let highScores = [] 
+
+// stored user initials, score, and remaining time to be pushed into highScores array prior to being set to local storage.
+let userScores = {} 
+
+//Quiz bank, includes questions/answers/booleans
 let quiz = [
     {question: "Which type of loop is used to perform repeated actions?",
     choices: ["for loop", "and loop", "if loop", "whoop loop"],
@@ -37,16 +48,14 @@ let quiz = [
     }
 ];
 
-// let score = 0; //remove if turning local storage back on.
 scoreBoard.textContent = `Score: ${score}` 
 
 // provides functionality for start button to begin the quiz. 
 function startQuiz() {
-    startButton.setAttribute("disabled", "true") // disables start button when quiz started. Prevents repeated clicks and having multiple timers running over each other.
-    startButton.style = "visibility: hidden";
+    startButton.style = "visibility: hidden"; // hides start button upon starting quiz
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
     timeLeft = 90;
-    quizTime = setInterval(function() {
+    quizTime = setInterval(function() { 
         timeLeft--;
         timer.textContent = `Time left: ${timeLeft}`;
         if(timeLeft <= 0){
@@ -249,9 +258,7 @@ function init() {
     }
 }
 
-let highScores = []
 
-let userScores = {}
 
 
 
