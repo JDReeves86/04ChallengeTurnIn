@@ -10,7 +10,6 @@ let optionD = document.getElementById("option-D");
 let hiddenMessage = document.getElementById("hidden-message");
 let scoreBoard = document.getElementById("score-board");
 let restart = document.getElementById("restart");
-
 let score = 0
 let quizTime;
 let timeLeft;
@@ -40,7 +39,6 @@ let quiz = [
 
 // let score = 0; //remove if turning local storage back on.
 scoreBoard.textContent = `Score: ${score}` 
-
 
 // provides functionality for start button to begin the quiz. 
 function startQuiz() {
@@ -105,8 +103,8 @@ function questionTwo() {
     optionA.dataset.quiz = 1;
     optionA.dataset.answer = 0;
     optionA.textContent = quiz[1].choices[0];
-    optionA.removeEventListener("click", questionTwo);
-    optionA.addEventListener("click", questionThree);
+    optionA.removeEventListener("click", questionTwo); // remove prior event listener to prevent stacking of event listeners.
+    optionA.addEventListener("click", questionThree); // replace removed event listener to allow for moving on to next question.
     optionB.dataset.quiz = 1;
     optionB.dataset.answer = 1;
     optionB.textContent = quiz[1].choices[1];
@@ -202,55 +200,64 @@ function questionFive() {
 // Takes user to final page, removes the quiz form HTML elements and generates a form for the user to input their data. Submit button calls generateLeaderboard function.
 function finalPage() {
     quizBody.remove();
+
     clearInterval(quizTime);
     timer.textContent = `Quiz finished`;
     let form = document.createElement("form");
     form.setAttribute("id", "username")
     form.textContent = "Input your initials";
     document.body.appendChild(form);
+
     let input = document.createElement("input");
     input.setAttribute("type", "text");
-    form.appendChild(input)
+    form.appendChild(input);
+
     let button = document.createElement("button");
-    button.textContent = "submit"
+    button.textContent = "submit";
     button.setAttribute("id", "submit-score");
     form.appendChild(button);
+
     document.getElementById("submit-score").addEventListener("click", function(event){
         event.preventDefault();
         generateLeaderBoard(input.value);
-        optionA.removeEventListener("click", finalPage)
-        optionB.removeEventListener("click", finalPage)
-        optionC.removeEventListener("click", finalPage)
-        optionD.removeEventListener("click", finalPage)
+        optionA.removeEventListener("click", finalPage);
+        optionB.removeEventListener("click", finalPage);
+        optionC.removeEventListener("click", finalPage);
+        optionD.removeEventListener("click", finalPage);
     });
 }
 
 // Generates the leaderboard, requires input from the user as the 'x' variable to ensure users typed input is displayed.
 function generateLeaderBoard(x) {
     document.getElementById("username").remove(); // Remove form input elements
+
     let leaderBoard = document.createElement("div"); // generates div for leaderboard elements
     leaderBoard.setAttribute("id", "leaderboard");
     document.body.appendChild(leaderBoard);
+
     let header = document.createElement("h3"); // generates leaderboard header h3
     header.textContent = "Leaderboard";
     leaderBoard.appendChild(header);
+
     let list = document.createElement("ol"); //generates leaderboard ol
     leaderBoard.appendChild(list);
     let userName = document.createElement("li"); // generates leaderboard list items
     list.appendChild(userName);
     userName.textContent = `${x}`;
+
     let scoreSpan = document.createElement("span");
     scoreSpan.innerHTML = `&nbsp &nbsp &nbsp &nbsp Score: ${score} &nbsp &nbsp &nbsp &nbsp`;
     userName.appendChild(scoreSpan);
+
     let timeLeftSpan = document.createElement("span");
     timeLeftSpan.innerHTML = ` Remaining time: ${timeLeft} seconds`;
     userName.appendChild(timeLeftSpan);
-   
 
     let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
     restart.setAttribute("id", "restart");
     restart.textContent = "Restart"
     leaderBoard.appendChild(restart);
+
     restart.addEventListener("click", function(){ // sets functionality of reset button.
         optionA.removeEventListener("click", finalPage)
         optionB.removeEventListener("click", finalPage)
@@ -265,7 +272,6 @@ function generateLeaderBoard(x) {
 
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", questionOne);
-
 
 // Event listeners for each of the selectable options. Pulls the dataset values assigned to the elements and passes those values into the answerChecker function when called.
 optionA.addEventListener("click", function(event) {
