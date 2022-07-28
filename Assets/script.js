@@ -43,6 +43,7 @@ scoreBoard.textContent = `Score: ${score}`
 // provides functionality for start button to begin the quiz. 
 function startQuiz() {
     startButton.setAttribute("disabled", "true") // disables start button when quiz started. Prevents repeated clicks and having multiple timers running over each other.
+    startButton.style = "visibility: hidden";
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
     timeLeft = 90;
     quizTime = setInterval(function() {
@@ -219,7 +220,16 @@ function finalPage() {
 
     document.getElementById("submit-score").addEventListener("click", function(event){
         event.preventDefault();
+
+        userScores.user = input.value
+        userScores.totalScore = score
+        userScores.totalTime = timeLeft
+        storeHighScores()
+        console.log(userScores)
+        console.log(highScores)
+
         generateLeaderBoard(input.value);
+        
         optionA.removeEventListener("click", finalPage);
         optionB.removeEventListener("click", finalPage);
         optionC.removeEventListener("click", finalPage);
@@ -227,8 +237,27 @@ function finalPage() {
     });
 }
 
+function storeHighScores() {
+    highScores.push(userScores)
+    localStorage.setItem("highscores", JSON.stringify(highScores))
+}
+
+function init() {
+    let storedHighScores = JSON.parse(localStorage.getItem("highscores"))
+    if (storedHighScores !== null) {
+        highScores = storedHighScores
+    }
+}
+
+let highScores = []
+
+let userScores = {}
+
+
+
+
 // Generates the leaderboard, requires input from the user as the 'x' variable to ensure users typed input is displayed.
-function generateLeaderBoard(x) {
+function generateLeaderBoard() {
     document.getElementById("username").remove(); // Remove form input elements
 
     let leaderBoard = document.createElement("div"); // generates div for leaderboard elements
@@ -241,17 +270,14 @@ function generateLeaderBoard(x) {
 
     let list = document.createElement("ol"); //generates leaderboard ol
     leaderBoard.appendChild(list);
-    let userName = document.createElement("li"); // generates leaderboard list items
-    list.appendChild(userName);
-    userName.textContent = `${x}`;
 
-    let scoreSpan = document.createElement("span");
-    scoreSpan.innerHTML = `&nbsp &nbsp &nbsp &nbsp Score: ${score} &nbsp &nbsp &nbsp &nbsp`;
-    userName.appendChild(scoreSpan);
+    for (i = 0; i < highScores.length; i++) {
+        let highscoreUsers = `${highScores[i].user} \u00a0 \u00a0 Score: ${highScores[i].totalScore} \u00a0 \u00a0 Remaining time: ${highScores[i].totalTime}`;
+        let highscoreListItem = document.createElement("li");
+        highscoreListItem.textContent = highscoreUsers;
 
-    let timeLeftSpan = document.createElement("span");
-    timeLeftSpan.innerHTML = ` Remaining time: ${timeLeft} seconds`;
-    userName.appendChild(timeLeftSpan);
+        list.appendChild(highscoreListItem)
+    }
 
     let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
     restart.setAttribute("id", "restart");
@@ -265,10 +291,71 @@ function generateLeaderBoard(x) {
         optionD.removeEventListener("click", finalPage)
         window.location.reload()
     });
+
+    let clearLeaderboard = document.createElement("button"); // generates clear leaderboard button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
+    clearLeaderboard.setAttribute("id", "clear");
+    clearLeaderboard.textContent = "Clear leaderboard"
+    leaderBoard.appendChild(clearLeaderboard);
+
+    clearLeaderboard.addEventListener("click", function(){
+        highScores.push(userScores)
+        highScores.splice(0)
+        localStorage.setItem("highscores", JSON.stringify(highScores))
+        console.log(highScores);
+        regenLeaderBoard();
+    });
+}
+
+function regenLeaderBoard() {
+    document.getElementById("leaderboard").remove(); // Remove form input elements
+
+    let leaderBoard = document.createElement("div"); // generates div for leaderboard elements
+    leaderBoard.setAttribute("id", "leaderboard");
+    document.body.appendChild(leaderBoard);
+
+    let header = document.createElement("h3"); // generates leaderboard header h3
+    header.textContent = "Leaderboard";
+    leaderBoard.appendChild(header);
+
+    let list = document.createElement("ol"); //generates leaderboard ol
+    leaderBoard.appendChild(list);
+
+    for (i = 0; i < highScores.length; i++) {
+        let highscoreUsers = `${highScores[i].user} \u00a0 \u00a0 Score: ${highScores[i].totalScore} \u00a0 \u00a0 Remaining time: ${highScores[i].totalTime}`;
+        let highscoreListItem = document.createElement("li");
+        highscoreListItem.textContent = highscoreUsers;
+
+        list.appendChild(highscoreListItem)
+    }
+
+    let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
+    restart.setAttribute("id", "restart");
+    restart.textContent = "Restart"
+    leaderBoard.appendChild(restart);
+
+    restart.addEventListener("click", function(){ // sets functionality of reset button.
+        optionA.removeEventListener("click", finalPage)
+        optionB.removeEventListener("click", finalPage)
+        optionC.removeEventListener("click", finalPage)
+        optionD.removeEventListener("click", finalPage)
+        window.location.reload()
+    });
+
+    let clearLeaderboard = document.createElement("button"); // generates clear leaderboard button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
+    clearLeaderboard.setAttribute("id", "clear");
+    clearLeaderboard.textContent = "Clear leaderboard"
+    leaderBoard.appendChild(clearLeaderboard);
+
+    clearLeaderboard.addEventListener("click", function(){
+        highScores.splice(-2)
+        console.log(highScores);
+        storeHighScores()
+        regenLeaderBoard()
+    });
 }
 
 //calls init()
-// init()
+init()
 
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", questionOne);
