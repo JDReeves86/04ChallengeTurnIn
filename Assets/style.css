@@ -83,6 +83,7 @@ div p {
     margin: 1rem
 }
 
-#leaderboard > span {
-    padding-left: 10rem;
+#leaderboard li {
+    list-style:decimal inside;
+    background-color: var(--light);
 }

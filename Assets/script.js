@@ -16,24 +16,24 @@ let quizTime;
 let timeLeft;
 
 let quiz = [
-    {question: "What color is the sky?",
-    choices: ["blue", "green", "grey", "orange"],
+    {question: "Which type of loop is used to perform repeated actions?",
+    choices: ["for loop", "and loop", "if loop", "whoop loop"],
     answers: [true, false, false, false]
     },
-    {question: "What do fish do?",
-    choices: ["fly", "swim", "run", "nothing"],
+    {question: "What type of brackets are used in an array?",
+    choices: ["curly", "straight", "round", "angle"],
     answers: [false, true, false, false]
     },
-    {question: "Are you hungry?",
-    choices: ["maybe", "yes", "no", "I am the correct answer"],
+    {question: "HTML stands for ______.",
+    choices: ["Hyper Text Make-up Language", "Hyper Time Markup Lamguage", "Hyper Text Markup Lingo", "Hyper Text Markup Language"],
     answers: [false, false, false, true]
     },
-    {question: "What is the meaning of life?",
-    choices: ["Existence", "To leave the world a better place", "There is no purpose", "I am still the correct answer"],
-    answers: [false, false, false, true]
+    {question: "The && operator is used for _______.",
+    choices: ["concatinating strings together", "creating a comment line", "logical operators meaning AND", "logical operators meaning OR"],
+    answers: [false, false, true, false]
     },
-    {question: "You have a 25% chance of getting this question correct by choosing at random.",
-    choices: ["option A", "option B", "option C", "option D"],
+    {question: "Math.random() is used to generate random ______. ",
+    choices: ["functions", "variables", "numbers", "letters"],
     answers: [false, false, true, false]
     }
 ];
