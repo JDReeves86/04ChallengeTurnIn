@@ -69,7 +69,7 @@ THEN I can save my initials and my score
 <br>
 
 5. WHEN the user types in their initials and clicks submit, their initials and score are displayed along with the remaining time on their attempt.
-    > Once the user has reached the final page and type in their initials, they click submit and their initials are taken from the text input, the remaining time left on the timer and their score are also pulled and displayed on the screen for them to see. They then have an option to restart the quiz which resets the page and they can attempt to beat their high score.
+    > Once the user has reached the final page and type in their initials, they click submit and their initials are taken from the text input, the remaining time left on the timer and their score are also pulled and displayed on the screen for them to see. The leaderboard will list all users who hav attempted to take the quiz using local storage. The user is presented with an option to either restart the quiz or clear the leaderboard. Clearing the leaderboard will remove the currently listed attempts while also emptying local storage. Restart will reload the page for the user to make another attempt. Reloading the page preserves the leaderboard so the user(s) can compare prior attempts. Leaderboard is not sorted in anyway but is rather listed in chronological order of attempts.
 
 <br>
 <br>
