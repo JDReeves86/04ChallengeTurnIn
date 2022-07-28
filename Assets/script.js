@@ -241,6 +241,7 @@ function finalPage() {
     });
 }
 
+
 // Generates the leaderboard, requires input from the user as the 'x' variable to ensure users typed input is displayed.
 function generateLeaderBoard() {
     document.getElementById("username").remove(); // Remove form input elements
