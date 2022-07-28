@@ -50,17 +50,17 @@ THEN I can save my initials and my score
 <br>
 
 1. WHEN the start button is selected, a timer starts counting down and the first question is presented.
-    >
+    > An event listener tied to the start quiz button calls the function that reveals the hidden quiz HTML elements. It also starts the timer for the quiz. Once the timer reaches 0 or, int he event is less than 0 due to incorrect answers, the user is immediately taken to the final page where they are prompted to input their initials. This occurs regardless of whether or not they complete the quiz.
 
 <br>
 
 2. WHEN an answer is selected, the next question populates the page.
-    >
+    > All questions, answers, and associated boolean values are stored in the quiz array. Within the array are objects that hold the question, answer, and boolean values associated with the answers. When an option is selected it uses and event listener to call the next question function which changes the text content of the quiz body. By storing the questions and answers in the array and storing them as objects the script can pull the desired strings using dot notation.
 
 <br>
 
 3. WHEN selecting an incorrect answer, 15 seconds are subtracted from the timer. If a correct answer is selected no time is subtracted and one point is added to the score.
-    >
+    > The function answerChecker is tied to event listeners for each of the answer elements. Using data-sets, the script can dynamically change data attributes to pass into the answerChecker function to ensure the appropriate boolean values are associated with the answer selected. If the boolean value is true, a point is added to the score. If false, 15 seconds are subtracted from the timer and the next question function is called.
 <br>
 
 4. WHEN the user answers all the questions or when the timer reaches 0, the user is taken to the final page where they are prompted to input their initials.
@@ -134,7 +134,7 @@ Scoreboard showing the users initials, score, and remaining time on their attemp
 Link to Github repo: https://github.com/JDReeves86/04ChallengeTurnIn
 
 
-Link to live page: https://jdreeves86.github.io/03challengeTurnIn/
+Link to live page: https://jdreeves86.github.io/04ChallengeTurnIn/
 
 <br>
 <br>

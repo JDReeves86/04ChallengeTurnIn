@@ -55,10 +55,6 @@ function startQuiz() {
             finalPage();
         };
     }, 1000);
-    optionA.removeEventListener("click", finalPage)
-    optionB.removeEventListener("click", finalPage)
-    optionC.removeEventListener("click", finalPage)
-    optionD.removeEventListener("click", finalPage)
 };
 
 // Changes HTML to display that the user ran out of time.
@@ -247,6 +243,10 @@ function generateLeaderBoard(x) {
     restart.textContent = "Restart"
     leaderBoard.appendChild(restart);
     restart.addEventListener("click", function(){ // sets functionality of reset button.
+        optionA.removeEventListener("click", finalPage)
+        optionB.removeEventListener("click", finalPage)
+        optionC.removeEventListener("click", finalPage)
+        optionD.removeEventListener("click", finalPage)
         window.location.reload()
     });
 
