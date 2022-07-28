@@ -1,3 +1,170 @@
+# Challenge 04 
+
+
+## Coding Quiz
+
+---
+
+### Contents 
+
+---
+
+1. Objectives
+2. About
+3. Screenshots
+4. Links
+5. Assignment details & grading rubric (*ignore me*)
+
+<br>
+<br>
+
+### Objectives ###
+
+---
+
+<br>
+
+WHEN I click the start button
+THEN a timer starts and I am presented with a question
+WHEN I answer a question
+THEN I am presented with another question
+WHEN I answer a question incorrectly
+THEN time is subtracted from the clock
+WHEN all questions are answered or the timer reaches 0
+THEN the game is over
+WHEN the game is over
+THEN I can save my initials and my score
+
+1. WHEN the start button is selected, a timer starts counting down and the first question is presented.
+2. WHEN an answer is selected, the next question populates the page.
+3. WHEN selecting an incorrect answer, 15 seconds are subtracted from the timer. If a correct answer is selected no time is subtracted and one point is added to the score.
+4. WHEN the user answers all the questions or when the timer reaches 0, the user is taken to the final page where they are prompted to input their initials.
+5. WHEN the user types in their initials and clicks submit, their initials and score are displayed along with the remaining time on their attempt.
+<br>
+<br>
+
+### About ###
+
+---
+
+<br>
+
+1. WHEN the start button is selected, a timer starts counting down and the first question is presented.
+    >
+
+<br>
+
+2. WHEN an answer is selected, the next question populates the page.
+    >
+
+<br>
+
+3. WHEN selecting an incorrect answer, 15 seconds are subtracted from the timer. If a correct answer is selected no time is subtracted and one point is added to the score.
+    >
+<br>
+
+4. WHEN the user answers all the questions or when the timer reaches 0, the user is taken to the final page where they are prompted to input their initials.
+    >
+
+<br>
+
+5. WHEN the user types in their initials and clicks submit, their initials and score are displayed along with the remaining time on their attempt.
+    >
+
+<br>
+<br>
+
+### Screenshots ###
+
+---
+
+<br>
+
+![myscreenshot](./Assets/screenshot1.png)
+
+<br>
+
+Initial state
+
+<br>
+
+  ---
+
+<br>
+
+![myscreenshot](./Assets/screenshot2.png)
+
+<br>
+
+Start of quiz, demonstrating timer & score
+
+<br>
+
+  ---
+
+<br>
+
+![myscreenshot](./Assets/screenshot2.png)
+
+<br>
+
+User inputs their initial at completion of quiz
+
+<br>
+
+---
+
+<br>
+
+![myscreenshot](./Assets/screenshot3.png)
+
+<br>
+
+Scoreboard showing the users initials, score, and remaining time on their attempt.
+
+<br>
+
+### Links ###
+
+---
+
+<br>
+
+
+Link to Github repo: https://github.com/JDReeves86/04ChallengeTurnIn
+
+
+Link to live page: https://jdreeves86.github.io/03challengeTurnIn/
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+---
+
+---
+
+## Assignment Details & Grading Rubric ##
+
+---
+
+---
+
+<br>
+<br>
+
+
+
+
+
+
+
 # 04 Web APIs: Code Quiz
 
 ## Your Task

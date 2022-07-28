@@ -46,7 +46,7 @@ scoreBoard.textContent = `Score: ${score}`
 function startQuiz() {
     startButton.setAttribute("disabled", "true") // disables start button when quiz started
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
-    timeLeft = 10;
+    timeLeft = 90;
     quizTime = setInterval(function() {
         timeLeft--;
         timer.textContent = `Time left: ${timeLeft}`;
@@ -209,7 +209,7 @@ function finalPage() {
     timer.textContent = `Quiz finished`;
     let form = document.createElement("form");
     form.setAttribute("id", "username")
-    form.textContent = "Input your name";
+    form.textContent = "Input your initials";
     document.body.appendChild(form);
     let input = document.createElement("input");
     input.setAttribute("type", "text");
