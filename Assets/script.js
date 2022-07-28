@@ -44,7 +44,7 @@ scoreBoard.textContent = `Score: ${score}`
 
 // provides functionality for start button to begin the quiz. 
 function startQuiz() {
-    startButton.setAttribute("disabled", "true") // disables start button when quiz started
+    startButton.setAttribute("disabled", "true") // disables start button when quiz started. Prevents repeated clicks and having multiple timers running over each other.
     quizBody.style = "visibility: visible"; // shows quiz body when quiz started
     timeLeft = 90;
     quizTime = setInterval(function() {
@@ -78,7 +78,7 @@ function answerChecker(x, y) {
     }
 };
 
-//populates first question
+//populates first question & assigns data values to allow for answerChecker function.
 function questionOne() {
     questionBox.textContent = quiz[0].question;
     optionA.dataset.quiz = 0;
@@ -99,7 +99,7 @@ function questionOne() {
     optionD.addEventListener("click", questionTwo);
 };
 
-//populates second question
+//populates second question & reassigns data values
 function questionTwo() {
     questionBox.textContent = quiz[1].question;
     optionA.dataset.quiz = 1;
@@ -124,7 +124,7 @@ function questionTwo() {
     optionD.addEventListener("click", questionThree);
 };
 
-//populates third question
+//populates third question & reassigns data values
 function questionThree() {
     questionBox.textContent = quiz[2].question
     optionA.dataset.quiz = 2;
@@ -149,7 +149,7 @@ function questionThree() {
     optionD.addEventListener("click", questionFour);
 };
 
-// populates fourth question
+// populates fourth question & reassigns data values
 function questionFour() {
     questionBox.textContent = quiz[3].question
     optionA.dataset.quiz = 3;
@@ -174,7 +174,7 @@ function questionFour() {
     optionD.addEventListener("click", questionFive);
 };
 
-// populates fifth question
+// populates fifth question & reassigns data values
 function questionFive() {
     questionBox.textContent = quiz[4].question
     optionA.dataset.quiz = 4;
@@ -199,6 +199,7 @@ function questionFive() {
     optionD.addEventListener("click", finalPage);
 };
 
+// Takes user to final page, removes the quiz form HTML elements and generates a form for the user to input their data. Submit button calls generateLeaderboard function.
 function finalPage() {
     quizBody.remove();
     clearInterval(quizTime);
@@ -224,6 +225,7 @@ function finalPage() {
     });
 }
 
+// Generates the leaderboard, requires input from the user as the 'x' variable to ensure users typed input is displayed.
 function generateLeaderBoard(x) {
     document.getElementById("username").remove(); // Remove form input elements
     let leaderBoard = document.createElement("div"); // generates div for leaderboard elements
@@ -235,8 +237,15 @@ function generateLeaderBoard(x) {
     let list = document.createElement("ol"); //generates leaderboard ol
     leaderBoard.appendChild(list);
     let userName = document.createElement("li"); // generates leaderboard list items
-    userName.textContent = `${x}  Score: ${score}  Time left: ${timeLeft} seconds`;
     list.appendChild(userName);
+    userName.textContent = `${x}`;
+    let scoreSpan = document.createElement("span");
+    scoreSpan.innerHTML = `&nbsp &nbsp &nbsp &nbsp Score: ${score} &nbsp &nbsp &nbsp &nbsp`;
+    userName.appendChild(scoreSpan);
+    let timeLeftSpan = document.createElement("span");
+    timeLeftSpan.innerHTML = ` Remaining time: ${timeLeft} seconds`;
+    userName.appendChild(timeLeftSpan);
+   
 
     let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
     restart.setAttribute("id", "restart");
@@ -249,13 +258,6 @@ function generateLeaderBoard(x) {
         optionD.removeEventListener("click", finalPage)
         window.location.reload()
     });
-
-    let clearLeaders = document.createElement("button"); // generates button to clear the leaderboard, resets local storage score to 0
-    clearLeaders.setAttribute("id", "restart");
-    clearLeaders.textContent = "Clear Leaderboard"
-    leaderBoard.appendChild(clearLeaders);
-    clearLeaders.addEventListener("click", function(){
-    });
 }
 
 //calls init()
@@ -264,6 +266,8 @@ function generateLeaderBoard(x) {
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", questionOne);
 
+
+// Event listeners for each of the selectable options. Pulls the dataset values assigned to the elements and passes those values into the answerChecker function when called.
 optionA.addEventListener("click", function(event) {
     let dataQuiz = event.target.getAttribute("data-quiz");
     let dataAnswer = event.target.getAttribute("data-answer");  

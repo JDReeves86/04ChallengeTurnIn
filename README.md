@@ -64,12 +64,12 @@ THEN I can save my initials and my score
 <br>
 
 4. WHEN the user answers all the questions or when the timer reaches 0, the user is taken to the final page where they are prompted to input their initials.
-    >
+    > When either the final question is answered or the timer reaches 0, the finalPage function is called and the user is taken to the end of the quiz. At this point new HTML elements are generated creating a simple form with text input and a submit button.
 
 <br>
 
 5. WHEN the user types in their initials and clicks submit, their initials and score are displayed along with the remaining time on their attempt.
-    >
+    > Once the user has reached the final page and type in their initials, they click submit and their initials are taken from the text input, the remaining time left on the timer and their score are also pulled and displayed on the screen for them to see. They then have an option to restart the quiz which resets the page and they can attempt to beat their high score.
 
 <br>
 <br>
