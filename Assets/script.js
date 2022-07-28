@@ -65,14 +65,6 @@ function startQuiz() {
     }, 1000);
 };
 
-// Changes HTML to display that the user ran out of time.
-function outOfTime(){
-    quizBody.style = "visibility: hidden";
-    startButton.removeAttribute("disabled")
-    timer.textContent = `You are out of time`;
-    score = 0;
-};
-
 // checks boolean values in object associated with correct answers. True = correct answer. If true, adds a point to the score, if false, timer decreases by 5 seconds.
 function answerChecker(x, y) {
     if (quiz[x].answers[y] == true) {
