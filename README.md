@@ -92,7 +92,7 @@ Initial state
 
 <br>
 
-![myscreenshot](./Assets/screenshot2.png)
+![alt text](./Assets/ScreenCastGif.gif)
 
 <br>
 
