@@ -12,7 +12,7 @@ let scoreBoard = document.getElementById("score-board");
 let restart = document.getElementById("restart");
 let score = 0;
 
-// Allows for global scoping of timer
+// Allows for global scoping of timer so it can be stopped upon completion of quiz.
 let quizTime; 
 
 // Allows for global scoping of remaining time
@@ -201,59 +201,45 @@ function questionFive() {
 
 // Takes user to final page, removes the quiz form HTML elements and generates a form for the user to input their data. Submit button calls generateLeaderboard function.
 function finalPage() {
-    quizBody.remove();
+    quizBody.remove(); // Removes quiz body HTML prior to rendering new HTML elements
 
-    clearInterval(quizTime);
+    clearInterval(quizTime); //Stops timer
+
     timer.textContent = `Quiz finished`;
+
+    //creates form element
     let form = document.createElement("form");
     form.setAttribute("id", "username")
     form.textContent = "Input your initials";
     document.body.appendChild(form);
 
+    //creates input field
     let input = document.createElement("input");
     input.setAttribute("type", "text");
     form.appendChild(input);
 
+    //creates button
     let button = document.createElement("button");
     button.textContent = "submit";
     button.setAttribute("id", "submit-score");
     form.appendChild(button);
 
+    //button listener event
     document.getElementById("submit-score").addEventListener("click", function(event){
         event.preventDefault();
 
+        //sets user inputted initials, current score and timeLeft values into the userScores object declared earlier.
         userScores.user = input.value
         userScores.totalScore = score
         userScores.totalTime = timeLeft
         storeHighScores()
-        console.log(userScores)
-        console.log(highScores)
+        console.log(userScores) //auditing object & arrays
+        console.log(highScores) //
 
-        generateLeaderBoard(input.value);
-        
-        optionA.removeEventListener("click", finalPage);
-        optionB.removeEventListener("click", finalPage);
-        optionC.removeEventListener("click", finalPage);
-        optionD.removeEventListener("click", finalPage);
+        //calls function to create leaderboard
+        generateLeaderBoard();
     });
 }
-
-function storeHighScores() {
-    highScores.push(userScores)
-    localStorage.setItem("highscores", JSON.stringify(highScores))
-}
-
-function init() {
-    let storedHighScores = JSON.parse(localStorage.getItem("highscores"))
-    if (storedHighScores !== null) {
-        highScores = storedHighScores
-    }
-}
-
-
-
-
-
 
 // Generates the leaderboard, requires input from the user as the 'x' variable to ensure users typed input is displayed.
 function generateLeaderBoard() {
@@ -270,53 +256,51 @@ function generateLeaderBoard() {
     let list = document.createElement("ol"); //generates leaderboard ol
     leaderBoard.appendChild(list);
 
+    // loops through highScores array and reaches into the objects stored in the array to display data. Loop necessary as multiple objects may be stored in array.
     for (i = 0; i < highScores.length; i++) {
         let highscoreUsers = `${highScores[i].user} \u00a0 \u00a0 Score: ${highScores[i].totalScore} \u00a0 \u00a0 Remaining time: ${highScores[i].totalTime}`;
-        let highscoreListItem = document.createElement("li");
-        highscoreListItem.textContent = highscoreUsers;
-
-        list.appendChild(highscoreListItem)
+        let highscoreListItem = document.createElement("li"); // generates list item for leaderboard
+        highscoreListItem.textContent = highscoreUsers; // set li text content 
+        list.appendChild(highscoreListItem) // appends generated li before looping again.
     }
 
-    let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
+    let restart = document.createElement("button"); // generates restart button to restart the page
     restart.setAttribute("id", "restart");
     restart.textContent = "Restart"
     leaderBoard.appendChild(restart);
 
-    restart.addEventListener("click", function(){ // sets functionality of reset button.
-        optionA.removeEventListener("click", finalPage)
-        optionB.removeEventListener("click", finalPage)
-        optionC.removeEventListener("click", finalPage)
-        optionD.removeEventListener("click", finalPage)
+    restart.addEventListener("click", function(){ // sets functionality of reset button. Merely reloads page
         window.location.reload()
     });
 
-    let clearLeaderboard = document.createElement("button"); // generates clear leaderboard button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
+    let clearLeaderboard = document.createElement("button"); // generates clear leaderboard button to restart the page
     clearLeaderboard.setAttribute("id", "clear");
     clearLeaderboard.textContent = "Clear leaderboard"
     leaderBoard.appendChild(clearLeaderboard);
 
+    // clear leaderboard functionality. Pushes current userScores object into the array before splicing index 0 to purge entire array. Then resets local storage to the now empty array.
     clearLeaderboard.addEventListener("click", function(){
         highScores.push(userScores)
         highScores.splice(0)
         localStorage.setItem("highscores", JSON.stringify(highScores))
-        console.log(highScores);
-        regenLeaderBoard();
+        console.log(highScores); // auditing newly cleared array
+        regenLeaderBoard(); // calls regenLeaderBoard()
     });
 }
 
+// Copy/Paste of generateLaderboard(), except instead of removing the form element, it removes the leaderboard element and reconstructs it. 
 function regenLeaderBoard() {
     document.getElementById("leaderboard").remove(); // Remove form input elements
 
-    let leaderBoard = document.createElement("div"); // generates div for leaderboard elements
+    let leaderBoard = document.createElement("div");
     leaderBoard.setAttribute("id", "leaderboard");
     document.body.appendChild(leaderBoard);
 
-    let header = document.createElement("h3"); // generates leaderboard header h3
+    let header = document.createElement("h3");
     header.textContent = "Leaderboard";
     leaderBoard.appendChild(header);
 
-    let list = document.createElement("ol"); //generates leaderboard ol
+    let list = document.createElement("ol");
     leaderBoard.appendChild(list);
 
     for (i = 0; i < highScores.length; i++) {
@@ -327,12 +311,12 @@ function regenLeaderBoard() {
         list.appendChild(highscoreListItem)
     }
 
-    let restart = document.createElement("button"); // generates restart button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
+    let restart = document.createElement("button"); 
     restart.setAttribute("id", "restart");
     restart.textContent = "Restart"
     leaderBoard.appendChild(restart);
 
-    restart.addEventListener("click", function(){ // sets functionality of reset button.
+    restart.addEventListener("click", function(){
         optionA.removeEventListener("click", finalPage)
         optionB.removeEventListener("click", finalPage)
         optionC.removeEventListener("click", finalPage)
@@ -340,17 +324,23 @@ function regenLeaderBoard() {
         window.location.reload()
     });
 
-    let clearLeaderboard = document.createElement("button"); // generates clear leaderboard button to restart the page,  ******does not clear local storage - score will continue to climb at this time*****
-    clearLeaderboard.setAttribute("id", "clear");
+    let clearLeaderboard = document.createElement("button"); // generates clear leaderboard button to restart the page for aesthetics only, listener event removed as once leaderboard is cleared there is no purpose in this button.
     clearLeaderboard.textContent = "Clear leaderboard"
     leaderBoard.appendChild(clearLeaderboard);
+}
 
-    clearLeaderboard.addEventListener("click", function(){
-        highScores.splice(-2)
-        console.log(highScores);
-        storeHighScores()
-        regenLeaderBoard()
-    });
+// checks localstorage for highscores. If present, parses objects within the array and places into highScores array to be used during leaderboard generation.
+function init() {
+    let storedHighScores = JSON.parse(localStorage.getItem("highscores"))
+    if (storedHighScores !== null) {
+        highScores = storedHighScores
+    }
+}
+
+// takes userScores object popuylated by current users data and pushes into highScores array before stringifying it and placing into local storage.
+function storeHighScores() {
+    highScores.push(userScores)
+    localStorage.setItem("highscores", JSON.stringify(highScores))
 }
 
 //calls init()
