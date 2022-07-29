@@ -79,80 +79,28 @@ function answerChecker(x, y) {
 };
 
 
-function questionPopulation(a, b, c, d, e) {
-    let i = a
-    questionBox.textContent = quiz[i].question;
-    switch (i) {
-        case 0: 
-            optionA.dataset.quiz = i;
-            optionA.dataset.answer = b;
-            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-            optionB.dataset.quiz = i;
-            optionB.dataset.answer = c;
-            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-            optionC.dataset.quiz = i;
-            optionC.dataset.answer = d;
-            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-            optionD.dataset.quiz = i;
-            optionD.dataset.answer = e;
-            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-        case 1:
-            optionA.dataset.quiz = i;
-            optionA.dataset.answer = b;
-            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-            optionB.dataset.quiz = i;
-            optionB.dataset.answer = c;
-            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-            optionC.dataset.quiz = i;
-            optionC.dataset.answer = d;
-            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-            optionD.dataset.quiz = i;
-            optionD.dataset.answer = e;
-            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-        case 2:
-            optionA.dataset.quiz = i;
-            optionA.dataset.answer = b;
-            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-            optionB.dataset.quiz = i;
-            optionB.dataset.answer = c;
-            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-            optionC.dataset.quiz = i;
-            optionC.dataset.answer = d;
-            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-            optionD.dataset.quiz = i;
-            optionD.dataset.answer = e;
-            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-        case 3:
-            optionA.dataset.quiz = i;
-            optionA.dataset.answer = b;
-            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-            optionB.dataset.quiz = i;
-            optionB.dataset.answer = c;
-            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-            optionC.dataset.quiz = i;
-            optionC.dataset.answer = d;
-            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-            optionD.dataset.quiz = i;
-            optionD.dataset.answer = e;
-            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-        case 4:
-            optionA.dataset.quiz = i;
-            optionA.dataset.answer = b;
-            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-            optionB.dataset.quiz = i;
-            optionB.dataset.answer = c;
-            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-            optionC.dataset.quiz = i;
-            optionC.dataset.answer = d;
-            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-            optionD.dataset.quiz = i;
-            optionD.dataset.answer = e;
-            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-    };
-    optionA.addEventListener("click", questionPopulation(i++, b, c, d, e));
-    optionB.addEventListener("click", questionPopulation(i++, b, c, d, e));
-    optionC.addEventListener("click", questionPopulation(i++, b, c, d, e));
-    optionD.addEventListener("click", questionPopulation(i++, b, c, d, e)); 
+function questionPopulation() {
+    console.log(quiz)
+    
+    for (let i=0; i<quiz.length; i++) {
+        questionBox.textContent = quiz[i].question;
+        optionA.dataset.quiz = i;
+        optionA.dataset.answer = 0;
+        optionA.textContent = quiz[i].choices[0];
+        optionB.dataset.quiz = i;
+        optionB.dataset.answer = 1;
+        optionB.textContent = quiz[i].choices[1];
+        optionC.dataset.quiz = i;
+        optionC.dataset.answer = 2;
+        optionC.textContent = quiz[i].choices[2];
+        optionD.dataset.quiz = i;
+        optionD.dataset.answer = 3;
+        optionD.textContent = quiz[i].choices[3];
+        optionA.addEventListener("click", questionPopulation());
+        optionB.addEventListener("click", questionPopulation());
+        optionC.addEventListener("click", questionPopulation());
+        optionD.addEventListener("click", questionPopulation()); 
+    }
 };
 
 //populates first question & assigns data values to allow for answerChecker function.
@@ -425,7 +373,7 @@ function storeHighScores() {
 init()
 
 startButton.addEventListener("click", startQuiz);
-startButton.addEventListener("click", questionPopulation(0, 0, 1, 2, 3));
+startButton.addEventListener("click", questionPopulation);
 
 // Event listeners for each of the selectable options. Pulls the dataset values assigned to the elements and passes those values into the answerChecker function when called.
 optionA.addEventListener("click", function(event) {
