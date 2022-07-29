@@ -80,21 +80,21 @@ function answerChecker(x, y) {
 
 function questionPopulation(a, b, c, d, e) {
     questionBox.textContent = quiz[a].question;
-    optionA.dataset.quiz = a;
-    optionA.dataset.answer = b;
-    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
+    a = optionA.dataset.quiz;
+    b = optionA.dataset.answer;
+    optionA.textContent = quiz[a].choices[b];
     optionA.addEventListener("click", questionPopulation(a, b, c, d, e))
-    optionB.dataset.quiz = a;
-    optionB.dataset.answer = c;
-    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
+    a = optionB.dataset.quiz;
+    c = optionB.dataset.answer;
+    optionB.textContent = quiz[a].choices[c];
     optionB.addEventListener("click", questionPopulation(a, b, c, d, e))
-    optionC.dataset.quiz = a;
-    optionC.dataset.answer = d;
-    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
+    a = optionC.dataset.quiz;
+    d = optionC.dataset.answer;
+    optionC.textContent = quiz[a].choices[d];
     optionC.addEventListener("click", questionPopulation(a, b, c, d, e))
-    optionD.dataset.quiz = a;
-    optionD.dataset.answer = e;
-    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
+    a = optionD.dataset.quiz;
+    e = optionD.dataset.answer;
+    optionD.textContent = quiz[a].choices[e];
     optionD.addEventListener("click", questionPopulation(a, b, c, d, e))
 };
 
@@ -368,7 +368,7 @@ function storeHighScores() {
 init()
 
 startButton.addEventListener("click", startQuiz);
-startButton.addEventListener("click", questionOne);
+startButton.addEventListener("click", questionPopulation(0, 0, 1, 2, 3));
 
 // Event listeners for each of the selectable options. Pulls the dataset values assigned to the elements and passes those values into the answerChecker function when called.
 optionA.addEventListener("click", function(event) {
