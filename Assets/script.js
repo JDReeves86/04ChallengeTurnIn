@@ -78,24 +78,29 @@ function answerChecker(x, y) {
     }
 };
 
+
 function questionPopulation(a, b, c, d, e) {
-    questionBox.textContent = quiz[a].question;
-    a = optionA.dataset.quiz;
-    b = optionA.dataset.answer;
-    optionA.textContent = quiz[a].choices[b];
-    optionA.addEventListener("click", questionPopulation(a, b, c, d, e))
-    a = optionB.dataset.quiz;
-    c = optionB.dataset.answer;
-    optionB.textContent = quiz[a].choices[c];
-    optionB.addEventListener("click", questionPopulation(a, b, c, d, e))
-    a = optionC.dataset.quiz;
-    d = optionC.dataset.answer;
-    optionC.textContent = quiz[a].choices[d];
-    optionC.addEventListener("click", questionPopulation(a, b, c, d, e))
-    a = optionD.dataset.quiz;
-    e = optionD.dataset.answer;
-    optionD.textContent = quiz[a].choices[e];
-    optionD.addEventListener("click", questionPopulation(a, b, c, d, e))
+    let i = a
+    while (i < 5) {
+        questionBox.textContent = quiz[i].question;
+        optionA.dataset.quiz = i;
+        optionA.dataset.answer = b;
+        optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
+        optionA.addEventListener("click", questionPopulation(i, b, c, d, e))
+        optionB.dataset.quiz = i;
+        optionB.dataset.answer = c;
+        optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
+        optionB.addEventListener("click", questionPopulation(i, b, c, d, e))
+        optionC.dataset.quiz = i;
+        optionC.dataset.answer = d;
+        optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
+        optionC.addEventListener("click", questionPopulation(i, b, c, d, e))
+        optionD.dataset.quiz = i;
+        optionD.dataset.answer = e;
+        optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
+        optionD.addEventListener("click", questionPopulation(i, b, c, d, e));
+        i++
+    }
 };
 
 //populates first question & assigns data values to allow for answerChecker function.
