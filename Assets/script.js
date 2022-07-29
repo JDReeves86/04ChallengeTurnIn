@@ -78,24 +78,44 @@ function answerChecker(x, y) {
     }
 };
 
+function questionPopulation(a, b, c, d, e) {
+    questionBox.textContent = quiz[a].question;
+    optionA.dataset.quiz = a;
+    optionA.dataset.answer = b;
+    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
+    optionA.addEventListener("click", questionPopulation(a, b, c, d, e))
+    optionB.dataset.quiz = a;
+    optionB.dataset.answer = c;
+    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
+    optionB.addEventListener("click", questionPopulation(a, b, c, d, e))
+    optionC.dataset.quiz = a;
+    optionC.dataset.answer = d;
+    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
+    optionC.addEventListener("click", questionPopulation(a, b, c, d, e))
+    optionD.dataset.quiz = a;
+    optionD.dataset.answer = e;
+    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
+    optionD.addEventListener("click", questionPopulation(a, b, c, d, e))
+};
+
 //populates first question & assigns data values to allow for answerChecker function.
 function questionOne() {
     questionBox.textContent = quiz[0].question;
     optionA.dataset.quiz = 0;
     optionA.dataset.answer = 0;
-    optionA.textContent = quiz[0].choices[0];
+    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
     optionA.addEventListener("click", questionTwo);
     optionB.dataset.quiz = 0;
     optionB.dataset.answer = 1;
-    optionB.textContent = quiz[0].choices[1];
+    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
     optionB.addEventListener("click", questionTwo);
     optionC.dataset.quiz = 0;
     optionC.dataset.answer = 2;
-    optionC.textContent = quiz[0].choices[2];
+    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
     optionC.addEventListener("click", questionTwo);
     optionD.dataset.quiz = 0;
     optionD.dataset.answer = 3;
-    optionD.textContent = quiz[0].choices[3];
+    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
     optionD.addEventListener("click", questionTwo);
 };
 
@@ -104,22 +124,22 @@ function questionTwo() {
     questionBox.textContent = quiz[1].question;
     optionA.dataset.quiz = 1;
     optionA.dataset.answer = 0;
-    optionA.textContent = quiz[1].choices[0];
+    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
     optionA.removeEventListener("click", questionTwo); // remove prior event listener to prevent stacking of event listeners.
     optionA.addEventListener("click", questionThree); // replace removed event listener to allow for moving on to next question.
     optionB.dataset.quiz = 1;
     optionB.dataset.answer = 1;
-    optionB.textContent = quiz[1].choices[1];
+    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
     optionB.removeEventListener("click", questionTwo);
     optionB.addEventListener("click", questionThree);
     optionC.dataset.quiz = 1;
     optionC.dataset.answer = 2;
-    optionC.textContent = quiz[1].choices[2];
+    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
     optionC.removeEventListener("click", questionTwo);
     optionC.addEventListener("click", questionThree);
     optionD.dataset.quiz = 1;
     optionD.dataset.answer = 3;
-    optionD.textContent = quiz[1].choices[3];
+    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
     optionD.removeEventListener("click", questionTwo);
     optionD.addEventListener("click", questionThree);
 };
@@ -129,22 +149,22 @@ function questionThree() {
     questionBox.textContent = quiz[2].question
     optionA.dataset.quiz = 2;
     optionA.dataset.answer = 0;
-    optionA.textContent = quiz[2].choices[0];
+    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
     optionA.removeEventListener("click", questionThree);
     optionA.addEventListener("click", questionFour);
     optionB.dataset.quiz = 2;
     optionB.dataset.answer = 1;
-    optionB.textContent = quiz[2].choices[1];
+    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
     optionB.removeEventListener("click", questionThree);
     optionB.addEventListener("click", questionFour);
     optionC.dataset.quiz = 2;
     optionC.dataset.answer = 2;
-    optionC.textContent = quiz[2].choices[2];
+    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
     optionC.removeEventListener("click", questionThree);
     optionC.addEventListener("click", questionFour);
     optionD.dataset.quiz = 2;
     optionD.dataset.answer = 3;
-    optionD.textContent = quiz[2].choices[3];
+    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
     optionD.removeEventListener("click", questionThree);
     optionD.addEventListener("click", questionFour);
 };
@@ -154,22 +174,22 @@ function questionFour() {
     questionBox.textContent = quiz[3].question
     optionA.dataset.quiz = 3;
     optionA.dataset.answer = 0;
-    optionA.textContent = quiz[3].choices[0];
+    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
     optionA.removeEventListener("click", questionFour);
     optionA.addEventListener("click", questionFive);
     optionB.dataset.quiz = 3;
     optionB.dataset.answer = 1;
-    optionB.textContent = quiz[3].choices[1];
+    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
     optionB.removeEventListener("click", questionFour);
     optionB.addEventListener("click", questionFive);
     optionC.dataset.quiz = 3;
     optionC.dataset.answer = 2;
-    optionC.textContent = quiz[3].choices[2];
+    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
     optionC.removeEventListener("click", questionFour);
     optionC.addEventListener("click", questionFive);
     optionD.dataset.quiz = 3;
     optionD.dataset.answer = 3;
-    optionD.textContent = quiz[3].choices[3];
+    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
     optionD.removeEventListener("click", questionFour);
     optionD.addEventListener("click", questionFive);
 };
@@ -179,22 +199,22 @@ function questionFive() {
     questionBox.textContent = quiz[4].question
     optionA.dataset.quiz = 4;
     optionA.dataset.answer = 0;
-    optionA.textContent = quiz[4].choices[0];
+    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
     optionA.removeEventListener("click", questionFive);
     optionA.addEventListener("click", finalPage);
     optionB.dataset.quiz = 4;
     optionB.dataset.answer = 1;
-    optionB.textContent = quiz[4].choices[1];
+    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
     optionB.removeEventListener("click", questionFive);
     optionB.addEventListener("click", finalPage);
     optionC.dataset.quiz = 4;
     optionC.dataset.answer = 2;
-    optionC.textContent = quiz[4].choices[2];
+    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
     optionC.removeEventListener("click", questionFive);
     optionC.addEventListener("click", finalPage);
     optionD.dataset.quiz = 4;
     optionD.dataset.answer = 3;
-    optionD.textContent = quiz[4].choices[3];
+    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
     optionD.removeEventListener("click", questionFive);
     optionD.addEventListener("click", finalPage);
 };
