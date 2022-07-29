@@ -81,26 +81,78 @@ function answerChecker(x, y) {
 
 function questionPopulation(a, b, c, d, e) {
     let i = a
-    while (i < 5) {
-        questionBox.textContent = quiz[i].question;
-        optionA.dataset.quiz = i;
-        optionA.dataset.answer = b;
-        optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-        optionA.addEventListener("click", questionPopulation(i, b, c, d, e))
-        optionB.dataset.quiz = i;
-        optionB.dataset.answer = c;
-        optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-        optionB.addEventListener("click", questionPopulation(i, b, c, d, e))
-        optionC.dataset.quiz = i;
-        optionC.dataset.answer = d;
-        optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-        optionC.addEventListener("click", questionPopulation(i, b, c, d, e))
-        optionD.dataset.quiz = i;
-        optionD.dataset.answer = e;
-        optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-        optionD.addEventListener("click", questionPopulation(i, b, c, d, e));
-        i++
-    }
+    questionBox.textContent = quiz[i].question;
+    switch (i) {
+        case 0: 
+            optionA.dataset.quiz = i;
+            optionA.dataset.answer = b;
+            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
+            optionB.dataset.quiz = i;
+            optionB.dataset.answer = c;
+            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
+            optionC.dataset.quiz = i;
+            optionC.dataset.answer = d;
+            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
+            optionD.dataset.quiz = i;
+            optionD.dataset.answer = e;
+            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
+        case 1:
+            optionA.dataset.quiz = i;
+            optionA.dataset.answer = b;
+            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
+            optionB.dataset.quiz = i;
+            optionB.dataset.answer = c;
+            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
+            optionC.dataset.quiz = i;
+            optionC.dataset.answer = d;
+            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
+            optionD.dataset.quiz = i;
+            optionD.dataset.answer = e;
+            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
+        case 2:
+            optionA.dataset.quiz = i;
+            optionA.dataset.answer = b;
+            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
+            optionB.dataset.quiz = i;
+            optionB.dataset.answer = c;
+            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
+            optionC.dataset.quiz = i;
+            optionC.dataset.answer = d;
+            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
+            optionD.dataset.quiz = i;
+            optionD.dataset.answer = e;
+            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
+        case 3:
+            optionA.dataset.quiz = i;
+            optionA.dataset.answer = b;
+            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
+            optionB.dataset.quiz = i;
+            optionB.dataset.answer = c;
+            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
+            optionC.dataset.quiz = i;
+            optionC.dataset.answer = d;
+            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
+            optionD.dataset.quiz = i;
+            optionD.dataset.answer = e;
+            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
+        case 4:
+            optionA.dataset.quiz = i;
+            optionA.dataset.answer = b;
+            optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
+            optionB.dataset.quiz = i;
+            optionB.dataset.answer = c;
+            optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
+            optionC.dataset.quiz = i;
+            optionC.dataset.answer = d;
+            optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
+            optionD.dataset.quiz = i;
+            optionD.dataset.answer = e;
+            optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
+    };
+    optionA.addEventListener("click", questionPopulation(i++, b, c, d, e));
+    optionB.addEventListener("click", questionPopulation(i++, b, c, d, e));
+    optionC.addEventListener("click", questionPopulation(i++, b, c, d, e));
+    optionD.addEventListener("click", questionPopulation(i++, b, c, d, e)); 
 };
 
 //populates first question & assigns data values to allow for answerChecker function.
