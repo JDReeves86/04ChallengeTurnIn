@@ -79,10 +79,16 @@ function answerChecker(x, y) {
 };
 
 
-function questionPopulation() {
-    console.log(quiz)
-    
-    for (let i=0; i<quiz.length; i++) {
+function questionPopulation(a) {
+    let i = a
+    console.log(i)
+    if(i === quiz.length) {
+        optionA.addEventListener("click", finalPage())
+        optionB.addEventListener("click", finalPage())
+        optionC.addEventListener("click", finalPage())
+        optionD.addEventListener("click", finalPage());
+    }
+    else {
         questionBox.textContent = quiz[i].question;
         optionA.dataset.quiz = i;
         optionA.dataset.answer = 0;
@@ -96,11 +102,12 @@ function questionPopulation() {
         optionD.dataset.quiz = i;
         optionD.dataset.answer = 3;
         optionD.textContent = quiz[i].choices[3];
-        optionA.addEventListener("click", questionPopulation());
-        optionB.addEventListener("click", questionPopulation());
-        optionC.addEventListener("click", questionPopulation());
-        optionD.addEventListener("click", questionPopulation()); 
-    }
+        i++;
+    };
+    optionA.addEventListener("click", questionPopulation(i));
+    optionB.addEventListener("click", questionPopulation(i));
+    optionC.addEventListener("click", questionPopulation(i));
+    optionD.addEventListener("click", questionPopulation(i));
 };
 
 //populates first question & assigns data values to allow for answerChecker function.
@@ -373,7 +380,7 @@ function storeHighScores() {
 init()
 
 startButton.addEventListener("click", startQuiz);
-startButton.addEventListener("click", questionPopulation);
+startButton.addEventListener("click", questionPopulation(0));
 
 // Event listeners for each of the selectable options. Pulls the dataset values assigned to the elements and passes those values into the answerChecker function when called.
 optionA.addEventListener("click", function(event) {
@@ -391,10 +398,5 @@ optionC.addEventListener("click", function(event) {
     let dataAnswer = event.target.getAttribute("data-answer");  
     answerChecker(dataQuiz, dataAnswer);
 });
-optionD.addEventListener("click", function(event) {
-    let dataQuiz = event.target.getAttribute("data-quiz");
-    let dataAnswer = event.target.getAttribute("data-answer");
-    answerChecker(dataQuiz, dataAnswer);
-}); 
 
 
