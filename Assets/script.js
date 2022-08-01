@@ -18,6 +18,8 @@ let quizTime;
 // Allows for global scoping of remaining time
 let timeLeft; 
 
+let i = 0;
+
 // for setting local storage of userScores object
 let highScores = [] 
 
@@ -45,7 +47,7 @@ let quiz = [
     {question: "Math.random() is used to generate random ______. ",
     choices: ["functions", "variables", "numbers", "letters"],
     answers: [false, false, true, false]
-    }
+    },
 ];
 
 scoreBoard.textContent = `Score: ${score}` 
@@ -78,18 +80,60 @@ function answerChecker(x, y) {
     }
 };
 
-
+// Dynamically renders questions by taking input argument and using value to pull indexed value in quiz array.
 function questionPopulation(a) {
     let i = a
-    console.log(i)
-    if(i === quiz.length) {
-        optionA.addEventListener("click", finalPage())
-        optionB.addEventListener("click", finalPage())
-        optionC.addEventListener("click", finalPage())
-        optionD.addEventListener("click", finalPage());
+    console.log(i);
+    console.log(quiz.length);
+    // console.log(questionBox.textContent = quiz[i].question, 
+    //     optionA.dataset.quiz = i,
+    //     optionA.dataset.answer = 0,
+    //     optionA.textContent = quiz[i].choices[0],
+    //     optionB.dataset.quiz = i,
+    //     optionB.dataset.answer = 1,
+    //     optionB.textContent = quiz[i].choices[1],
+    //     optionC.dataset.quiz = i,
+    //     optionC.dataset.answer = 2,
+    //     optionC.textContent = quiz[i].choices[2],
+    //     optionD.dataset.quiz = i,
+    //     optionD.dataset.answer = 3,
+    //     optionD.textContent = quiz[i].choices[3]);
+    if(i === (quiz.length-1)) {
+        console.log("quiz.length -1 reached");
+        optionA.removeEventListener("click", function(event) {
+            let dataQuiz = event.target.getAttribute("data-quiz");
+            let dataAnswer = event.target.getAttribute("data-answer");  
+            answerChecker(dataQuiz, dataAnswer);
+            questionPopulation(i);
+            i++;
+        });
+        optionA.addEventListener("click", finalPage);
+        optionB.removeEventListener("click", function(event) {
+            let dataQuiz = event.target.getAttribute("data-quiz");
+            let dataAnswer = event.target.getAttribute("data-answer");  
+            answerChecker(dataQuiz, dataAnswer);
+            questionPopulation(i);
+            i++;
+        });
+        optionB.addEventListener("click", finalPage);
+        optionC.removeEventListener("click", function(event) {
+            let dataQuiz = event.target.getAttribute("data-quiz");
+            let dataAnswer = event.target.getAttribute("data-answer");  
+            answerChecker(dataQuiz, dataAnswer);
+            questionPopulation(i);
+            i++;
+        });
+        optionC.addEventListener("click", finalPage);
+        optionD.removeEventListener("click", function(event) {
+            let dataQuiz = event.target.getAttribute("data-quiz");
+            let dataAnswer = event.target.getAttribute("data-answer");  
+            answerChecker(dataQuiz, dataAnswer);
+            questionPopulation(i);
+            i++;
+        });
+        optionD.addEventListener("click", finalPage);
     }
     else {
-        questionBox.textContent = quiz[i].question;
         optionA.dataset.quiz = i;
         optionA.dataset.answer = 0;
         optionA.textContent = quiz[i].choices[0];
@@ -102,134 +146,9 @@ function questionPopulation(a) {
         optionD.dataset.quiz = i;
         optionD.dataset.answer = 3;
         optionD.textContent = quiz[i].choices[3];
-        i++;
     };
-    optionA.addEventListener("click", questionPopulation(i));
-    optionB.addEventListener("click", questionPopulation(i));
-    optionC.addEventListener("click", questionPopulation(i));
-    optionD.addEventListener("click", questionPopulation(i));
 };
 
-//populates first question & assigns data values to allow for answerChecker function.
-function questionOne() {
-    questionBox.textContent = quiz[0].question;
-    optionA.dataset.quiz = 0;
-    optionA.dataset.answer = 0;
-    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-    optionA.addEventListener("click", questionTwo);
-    optionB.dataset.quiz = 0;
-    optionB.dataset.answer = 1;
-    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-    optionB.addEventListener("click", questionTwo);
-    optionC.dataset.quiz = 0;
-    optionC.dataset.answer = 2;
-    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-    optionC.addEventListener("click", questionTwo);
-    optionD.dataset.quiz = 0;
-    optionD.dataset.answer = 3;
-    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-    optionD.addEventListener("click", questionTwo);
-};
-
-//populates second question & reassigns data values
-function questionTwo() {
-    questionBox.textContent = quiz[1].question;
-    optionA.dataset.quiz = 1;
-    optionA.dataset.answer = 0;
-    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-    optionA.removeEventListener("click", questionTwo); // remove prior event listener to prevent stacking of event listeners.
-    optionA.addEventListener("click", questionThree); // replace removed event listener to allow for moving on to next question.
-    optionB.dataset.quiz = 1;
-    optionB.dataset.answer = 1;
-    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-    optionB.removeEventListener("click", questionTwo);
-    optionB.addEventListener("click", questionThree);
-    optionC.dataset.quiz = 1;
-    optionC.dataset.answer = 2;
-    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-    optionC.removeEventListener("click", questionTwo);
-    optionC.addEventListener("click", questionThree);
-    optionD.dataset.quiz = 1;
-    optionD.dataset.answer = 3;
-    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-    optionD.removeEventListener("click", questionTwo);
-    optionD.addEventListener("click", questionThree);
-};
-
-//populates third question & reassigns data values
-function questionThree() {
-    questionBox.textContent = quiz[2].question
-    optionA.dataset.quiz = 2;
-    optionA.dataset.answer = 0;
-    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-    optionA.removeEventListener("click", questionThree);
-    optionA.addEventListener("click", questionFour);
-    optionB.dataset.quiz = 2;
-    optionB.dataset.answer = 1;
-    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-    optionB.removeEventListener("click", questionThree);
-    optionB.addEventListener("click", questionFour);
-    optionC.dataset.quiz = 2;
-    optionC.dataset.answer = 2;
-    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-    optionC.removeEventListener("click", questionThree);
-    optionC.addEventListener("click", questionFour);
-    optionD.dataset.quiz = 2;
-    optionD.dataset.answer = 3;
-    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-    optionD.removeEventListener("click", questionThree);
-    optionD.addEventListener("click", questionFour);
-};
-
-// populates fourth question & reassigns data values
-function questionFour() {
-    questionBox.textContent = quiz[3].question
-    optionA.dataset.quiz = 3;
-    optionA.dataset.answer = 0;
-    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-    optionA.removeEventListener("click", questionFour);
-    optionA.addEventListener("click", questionFive);
-    optionB.dataset.quiz = 3;
-    optionB.dataset.answer = 1;
-    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-    optionB.removeEventListener("click", questionFour);
-    optionB.addEventListener("click", questionFive);
-    optionC.dataset.quiz = 3;
-    optionC.dataset.answer = 2;
-    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-    optionC.removeEventListener("click", questionFour);
-    optionC.addEventListener("click", questionFive);
-    optionD.dataset.quiz = 3;
-    optionD.dataset.answer = 3;
-    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-    optionD.removeEventListener("click", questionFour);
-    optionD.addEventListener("click", questionFive);
-};
-
-// populates fifth question & reassigns data values
-function questionFive() {
-    questionBox.textContent = quiz[4].question
-    optionA.dataset.quiz = 4;
-    optionA.dataset.answer = 0;
-    optionA.textContent = quiz[optionA.dataset.quiz].choices[optionA.dataset.answer];
-    optionA.removeEventListener("click", questionFive);
-    optionA.addEventListener("click", finalPage);
-    optionB.dataset.quiz = 4;
-    optionB.dataset.answer = 1;
-    optionB.textContent = quiz[optionB.dataset.quiz].choices[optionB.dataset.answer];
-    optionB.removeEventListener("click", questionFive);
-    optionB.addEventListener("click", finalPage);
-    optionC.dataset.quiz = 4;
-    optionC.dataset.answer = 2;
-    optionC.textContent = quiz[optionC.dataset.quiz].choices[optionC.dataset.answer];
-    optionC.removeEventListener("click", questionFive);
-    optionC.addEventListener("click", finalPage);
-    optionD.dataset.quiz = 4;
-    optionD.dataset.answer = 3;
-    optionD.textContent = quiz[optionD.dataset.quiz].choices[optionD.dataset.answer];
-    optionD.removeEventListener("click", questionFive);
-    optionD.addEventListener("click", finalPage);
-};
 
 // Takes user to final page, removes the quiz form HTML elements and generates a form for the user to input their data. Submit button calls generateLeaderboard function.
 function finalPage() {
@@ -272,7 +191,6 @@ function finalPage() {
         generateLeaderBoard();
     });
 }
-
 
 // Generates the leaderboard, requires input from the user as the 'x' variable to ensure users typed input is displayed.
 function generateLeaderBoard() {
@@ -380,23 +298,40 @@ function storeHighScores() {
 init()
 
 startButton.addEventListener("click", startQuiz);
-startButton.addEventListener("click", questionPopulation(0));
+startButton.addEventListener("click", function () {
+    questionPopulation(i);
+    i++;
+});
 
 // Event listeners for each of the selectable options. Pulls the dataset values assigned to the elements and passes those values into the answerChecker function when called.
 optionA.addEventListener("click", function(event) {
     let dataQuiz = event.target.getAttribute("data-quiz");
     let dataAnswer = event.target.getAttribute("data-answer");  
     answerChecker(dataQuiz, dataAnswer);
+    questionPopulation(i);
+    i++;
 });
 optionB.addEventListener("click", function(event) {
     let dataQuiz = event.target.getAttribute("data-quiz");
     let dataAnswer = event.target.getAttribute("data-answer");  
-    answerChecker(dataQuiz, dataAnswer);
+    answerChecker(dataQuiz, dataAnswer)
+    questionPopulation(i);
+    i++;
 });
 optionC.addEventListener("click", function(event) {
     let dataQuiz = event.target.getAttribute("data-quiz");
     let dataAnswer = event.target.getAttribute("data-answer");  
-    answerChecker(dataQuiz, dataAnswer);
+    answerChecker(dataQuiz, dataAnswer)
+    questionPopulation(i);
+    i++;
 });
+optionD.addEventListener("click", function(event) {
+    let dataQuiz = event.target.getAttribute("data-quiz");
+    let dataAnswer = event.target.getAttribute("data-answer");  
+    answerChecker(dataQuiz, dataAnswer)
+    questionPopulation(i);
+    i++;
+});
+
 
 
