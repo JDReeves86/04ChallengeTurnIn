@@ -38,7 +38,7 @@ let quiz = [
     answers: [false, true, false, false]
     },
     {question: "HTML stands for ______.",
-    choices: ["Hyper Text Make-up Language", "Hyper Time Markup Lamguage", "Hyper Text Markup Lingo", "Hyper Text Markup Language"],
+    choices: ["Hyper Text Make-up Language", "Hyper Time Markup Language", "Hyper Text Markup Lingo", "Hyper Text Markup Language"],
     answers: [false, false, false, true]
     },
     {question: "The && operator is used for _______.",
