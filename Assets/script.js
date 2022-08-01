@@ -1,15 +1,15 @@
-let startButton = document.getElementById("start-button");
-let timer = document.getElementById("timer")
-let quizBody = document.getElementById("quiz-body");
-let questionBox = document.getElementById("question-box");
-let answerBox = document.getElementById("answer-box");
-let optionA = document.getElementById("option-A");
-let optionB = document.getElementById("option-B");
-let optionC = document.getElementById("option-C");
-let optionD = document.getElementById("option-D");
-let hiddenMessage = document.getElementById("hidden-message");
-let scoreBoard = document.getElementById("score-board");
-let restart = document.getElementById("restart");
+const startButton = document.getElementById("start-button");
+const timer = document.getElementById("timer")
+const quizBody = document.getElementById("quiz-body");
+const questionBox = document.getElementById("question-box");
+const answerBox = document.getElementById("answer-box");
+const optionA = document.getElementById("option-A");
+const optionB = document.getElementById("option-B");
+const optionC = document.getElementById("option-C");
+const optionD = document.getElementById("option-D");
+const hiddenMessage = document.getElementById("hidden-message");
+const scoreBoard = document.getElementById("score-board");
+const restart = document.getElementById("restart");
 let score = 0;
 
 // Allows for global scoping of timer so it can be stopped upon completion of quiz.
@@ -28,7 +28,7 @@ let highScores = []
 let userScores = {} 
 
 //Quiz bank, includes questions/answers/booleans
-let quiz = [
+const quiz = [
     {question: "Which type of loop is used to perform repeated actions?",
     choices: ["for loop", "and loop", "if loop", "whoop loop"],
     answers: [true, false, false, false]
