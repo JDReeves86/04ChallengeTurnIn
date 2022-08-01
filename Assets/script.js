@@ -18,6 +18,7 @@ let quizTime;
 // Allows for global scoping of remaining time
 let timeLeft; 
 
+// Declares i for incrementing through question generation function.
 let i = 0;
 
 // for setting local storage of userScores object
@@ -51,7 +52,7 @@ let quiz = [
     {question: "Here is a test querstion",
     choices: ["false", "false", "false", "true"],
     answers: [false, false, false, true],
-    }
+    },
 ];
 
 scoreBoard.textContent = `Score: ${score}` 
@@ -91,44 +92,53 @@ function questionPopulation(a) {
     console.log(quiz.length);
     console.log(
         questionBox.textContent = quiz[i].question, 
+        optionA.dataset.quiz = i,
+        optionA.dataset.answer = 0,
         optionA.textContent = quiz[i].choices[0],
+        optionB.dataset.quiz = i,
+        optionB.dataset.answer = 1,
         optionB.textContent = quiz[i].choices[1],
+        optionC.dataset.quiz = i,
+        optionC.dataset.answer = 2,
         optionC.textContent = quiz[i].choices[2],
-        optionD.textContent = quiz[i].choices[3]
+        optionD.dataset.quiz = i,
+        optionD.dataset.answer = 3,
+        optionD.textContent = quiz[i].choices[3],
         );
-    if(i == (quiz.length-1)) {
-        console.log("quiz.length -1 reached");
-        optionA.removeEventListener("click", function(event) {
-            let dataQuiz = event.target.getAttribute("data-quiz");
-            let dataAnswer = event.target.getAttribute("data-answer");  
-            answerChecker(dataQuiz, dataAnswer);
-            questionPopulation(i);
-            i++;
-        });
+
+    if(i === (quiz.length - 1)) {
+        console.log("quiz.length reached");
+        // optionA.removeEventListener("click", function(event) {
+        //     let dataQuiz = event.target.getAttribute("data-quiz");
+        //     let dataAnswer = event.target.getAttribute("data-answer");  
+        //     answerChecker(dataQuiz, dataAnswer);
+        //     questionPopulation(i);
+        //     i++;
+        // });
         optionA.addEventListener("click", finalPage);
-        optionB.removeEventListener("click", function(event) {
-            let dataQuiz = event.target.getAttribute("data-quiz");
-            let dataAnswer = event.target.getAttribute("data-answer");  
-            answerChecker(dataQuiz, dataAnswer);
-            questionPopulation(i);
-            i++;
-        });
+        // optionB.removeEventListener("click", function(event) {
+        //     let dataQuiz = event.target.getAttribute("data-quiz");
+        //     let dataAnswer = event.target.getAttribute("data-answer");  
+        //     answerChecker(dataQuiz, dataAnswer);
+        //     questionPopulation(i);
+        //     i++;
+        // });
         optionB.addEventListener("click", finalPage);
-        optionC.removeEventListener("click", function(event) {
-            let dataQuiz = event.target.getAttribute("data-quiz");
-            let dataAnswer = event.target.getAttribute("data-answer");  
-            answerChecker(dataQuiz, dataAnswer);
-            questionPopulation(i);
-            i++;
-        });
+        // optionC.removeEventListener("click", function(event) {
+        //     let dataQuiz = event.target.getAttribute("data-quiz");
+        //     let dataAnswer = event.target.getAttribute("data-answer");  
+        //     answerChecker(dataQuiz, dataAnswer);
+        //     questionPopulation(i);
+        //     i++;
+        // });
         optionC.addEventListener("click", finalPage);
-        optionD.removeEventListener("click", function(event) {
-            let dataQuiz = event.target.getAttribute("data-quiz");
-            let dataAnswer = event.target.getAttribute("data-answer");  
-            answerChecker(dataQuiz, dataAnswer);
-            questionPopulation(i);
-            i++;
-        });
+        // optionD.removeEventListener("click", function(event) {
+        //     let dataQuiz = event.target.getAttribute("data-quiz");
+        //     let dataAnswer = event.target.getAttribute("data-answer");  
+        //     answerChecker(dataQuiz, dataAnswer);
+        //     questionPopulation(i);
+        //     i++;
+        // });
         optionD.addEventListener("click", finalPage);
     }
     else {
