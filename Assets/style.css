@@ -92,7 +92,7 @@ div p {
 
 #username > *,
 #leaderboard > * {
-    margin: 0.5rem
+    margin: 1rem;
 }
 
 #leaderboard li {
