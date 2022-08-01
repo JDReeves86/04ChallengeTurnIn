@@ -154,7 +154,6 @@ function questionPopulation(a) {
     };
 };
 
-
 // Takes user to final page, removes the quiz form HTML elements and generates a form for the user to input their data. Submit button calls generateLeaderboard function.
 function finalPage() {
     quizBody.remove(); // Removes quiz body HTML prior to rendering new HTML elements
@@ -305,7 +304,7 @@ init()
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", function () {
     questionPopulation(i);
-    i++;
+    i++; //need to increment i upon initial calling of the question population function to ensure questions cycle correctly.
 });
 
 // Event listeners for each of the selectable options. Pulls the dataset values assigned to the elements and passes those values into the answerChecker function when called.
