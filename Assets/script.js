@@ -102,37 +102,9 @@ function questionPopulation(a) {
 
     if(i === (quiz.length - 1)) {
         console.log("quiz.length - 1 reached");
-        // optionA.removeEventListener("click", function(event) {
-        //     let dataQuiz = event.target.getAttribute("data-quiz");
-        //     let dataAnswer = event.target.getAttribute("data-answer");  
-        //     answerChecker(dataQuiz, dataAnswer);
-        //     questionPopulation(i);
-        //     i++;
-        // });
         optionA.addEventListener("click", finalPage);
-        // optionB.removeEventListener("click", function(event) {
-        //     let dataQuiz = event.target.getAttribute("data-quiz");
-        //     let dataAnswer = event.target.getAttribute("data-answer");  
-        //     answerChecker(dataQuiz, dataAnswer);
-        //     questionPopulation(i);
-        //     i++;
-        // });
         optionB.addEventListener("click", finalPage);
-        // optionC.removeEventListener("click", function(event) {
-        //     let dataQuiz = event.target.getAttribute("data-quiz");
-        //     let dataAnswer = event.target.getAttribute("data-answer");  
-        //     answerChecker(dataQuiz, dataAnswer);
-        //     questionPopulation(i);
-        //     i++;
-        // });
         optionC.addEventListener("click", finalPage);
-        // optionD.removeEventListener("click", function(event) {
-        //     let dataQuiz = event.target.getAttribute("data-quiz");
-        //     let dataAnswer = event.target.getAttribute("data-answer");  
-        //     answerChecker(dataQuiz, dataAnswer);
-        //     questionPopulation(i);
-        //     i++;
-        // });
         optionD.addEventListener("click", finalPage);
     }
 };
