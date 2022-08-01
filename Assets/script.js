@@ -78,6 +78,7 @@ function answerChecker(x, y) {
     }
 };
 
+<<<<<<< Updated upstream
 //populates first question & assigns data values to allow for answerChecker function.
 function questionOne() {
     questionBox.textContent = quiz[0].question;
@@ -197,6 +198,63 @@ function questionFive() {
     optionD.textContent = quiz[4].choices[3];
     optionD.removeEventListener("click", questionFive);
     optionD.addEventListener("click", finalPage);
+=======
+// Dynamically renders questions by taking input argument and using value to pull indexed value in quiz array.
+function questionPopulation(a) {
+    let i = a
+    console.log(i);
+    console.log(quiz.length);
+
+    questionBox.textContent = quiz[i].question;
+    optionA.dataset.quiz = i;
+    optionA.dataset.answer = 0;
+    optionA.textContent = quiz[i].choices[0];
+    optionB.dataset.quiz = i;
+    optionB.dataset.answer = 1;
+    optionB.textContent = quiz[i].choices[1];
+    optionC.dataset.quiz = i;
+    optionC.dataset.answer = 2;
+    optionC.textContent = quiz[i].choices[2];
+    optionD.dataset.quiz = i;
+    optionD.dataset.answer = 3;
+    optionD.textContent = quiz[i].choices[3];
+
+    if(i === (quiz.length - 1)) {
+        console.log("quiz.length - 1 reached");
+        // optionA.removeEventListener("click", function(event) {
+        //     let dataQuiz = event.target.getAttribute("data-quiz");
+        //     let dataAnswer = event.target.getAttribute("data-answer");  
+        //     answerChecker(dataQuiz, dataAnswer);
+        //     questionPopulation(i);
+        //     i++;
+        // });
+        optionA.addEventListener("click", finalPage);
+        // optionB.removeEventListener("click", function(event) {
+        //     let dataQuiz = event.target.getAttribute("data-quiz");
+        //     let dataAnswer = event.target.getAttribute("data-answer");  
+        //     answerChecker(dataQuiz, dataAnswer);
+        //     questionPopulation(i);
+        //     i++;
+        // });
+        optionB.addEventListener("click", finalPage);
+        // optionC.removeEventListener("click", function(event) {
+        //     let dataQuiz = event.target.getAttribute("data-quiz");
+        //     let dataAnswer = event.target.getAttribute("data-answer");  
+        //     answerChecker(dataQuiz, dataAnswer);
+        //     questionPopulation(i);
+        //     i++;
+        // });
+        optionC.addEventListener("click", finalPage);
+        // optionD.removeEventListener("click", function(event) {
+        //     let dataQuiz = event.target.getAttribute("data-quiz");
+        //     let dataAnswer = event.target.getAttribute("data-answer");  
+        //     answerChecker(dataQuiz, dataAnswer);
+        //     questionPopulation(i);
+        //     i++;
+        // });
+        optionD.addEventListener("click", finalPage);
+    }
+>>>>>>> Stashed changes
 };
 
 // Takes user to final page, removes the quiz form HTML elements and generates a form for the user to input their data. Submit button calls generateLeaderboard function.
