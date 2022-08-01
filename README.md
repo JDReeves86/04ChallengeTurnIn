@@ -55,7 +55,7 @@ THEN I can save my initials and my score
 <br>
 
 2. WHEN an answer is selected, the next question populates the page.
-    > All questions, answers, and associated boolean values are stored in the quiz array. Within the array are objects that hold the question, answer, and boolean values associated with the answers. When an option is selected it uses and event listener to call the next question function which changes the text content of the quiz body. By storing the questions and answers in the array and storing them as objects the script can pull the desired strings using dot notation.
+    > All questions, answers, and associated boolean values are stored in the quiz array. Within the array are objects that hold the question, answer, and boolean values associated with the answers. When the start button is clicked, the function questionPopulation is called with the argument vlaue of i declared in the beginning of the script. The start button also increments i by one to begin the proper sequencing of the questionPopulation function. As a user clicks on the options, an event listener recalls the questionPopulation function with the current value of i, then increments i by one again to prime the quiz for the next call of questionPopulation.
 
 <br>
 
