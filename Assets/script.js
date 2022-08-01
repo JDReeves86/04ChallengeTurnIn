@@ -49,10 +49,6 @@ let quiz = [
     choices: ["functions", "variables", "numbers", "letters"],
     answers: [false, false, true, false]
     },
-    {question: "Here is a test querstion",
-    choices: ["false", "false", "false", "true"],
-    answers: [false, false, false, true],
-    },
 ];
 
 scoreBoard.textContent = `Score: ${score}` 
@@ -90,6 +86,7 @@ function questionPopulation(a) {
     let i = a
     console.log(i);
     console.log(quiz.length);
+    // Deleting this console.log breaks the function <<=========  WHY???
     console.log(
         questionBox.textContent = quiz[i].question, 
         optionA.dataset.quiz = i,
@@ -107,7 +104,7 @@ function questionPopulation(a) {
         );
 
     if(i === (quiz.length - 1)) {
-        console.log("quiz.length reached");
+        console.log("quiz.length - 1 reached");
         // optionA.removeEventListener("click", function(event) {
         //     let dataQuiz = event.target.getAttribute("data-quiz");
         //     let dataAnswer = event.target.getAttribute("data-answer");  
